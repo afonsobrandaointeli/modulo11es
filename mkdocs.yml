@@ -1,0 +1,31 @@
+site_name: Módulo 11 ES
+
+theme:
+  name: readthedocs
+
+nav:
+  - Home: index.md
+  - "Data Sourcing e Data Analysis com R Studio": datasourcing.md
+  - "Arquitetura e Governança de Dados na Nuvem 1": arquitetura1.md
+  - "Arquitetura e Governança de Dados na Nuvem 2": arquitetura2.md
+  - "Ingestão e Processamento de Dados (Framework de testes e qualidade)": ingestao.md
+  - "Segurança e Governança de Dados (LGPD)": seguranca.md
+  - "Precificação em Nuvem": precificacao.md
+  - "Métricas, Telemetria e Gestão de Microserviços": metricas.md
+  - "Data Lakes e Data Warehouses": datalakes.md
+  - "Serviços e ETLs para Transformação de Dados e Processamento de Dados em Escala (train at scale)": etl.md
+  - "Processamento de Dados na Nuvem": processamento.md
+  - "Ciclo de Vida e Automatização de Pipeline de Dados (MLOps)": mlops.md
+  - "Processamento e Predição em Produção": predicao.md
+  - "User Interface e Dashboards": ui_dashboards.md
+  - "Data Storytelling": datastorytelling.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - tables
+  - admonition
+  - codehilite
