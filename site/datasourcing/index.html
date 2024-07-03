@@ -195,11 +195,193 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#modulo-11-de-engenharia-de-software-analise-de-dados-com-rstudio">Módulo 11 de Engenharia de Software: Análise de Dados com RStudio</a></li>
+            <li class="second-level"><a href="#introducao">Introdução</a></li>
+                
+            <li class="second-level"><a href="#ferramentas-utilizadas">Ferramentas Utilizadas</a></li>
+                
+                <li class="third-level"><a href="#rstudio">RStudio</a></li>
+                <li class="third-level"><a href="#rmarkdown">RMarkdown</a></li>
+                <li class="third-level"><a href="#appwrite">Appwrite</a></li>
+                <li class="third-level"><a href="#mariadb">MariaDB</a></li>
+                <li class="third-level"><a href="#elasticsearch">ElasticSearch</a></li>
+                <li class="third-level"><a href="#clickhouse">ClickHouse</a></li>
+                <li class="third-level"><a href="#streamlit">Streamlit</a></li>
+                <li class="third-level"><a href="#apache-spark">Apache Spark</a></li>
+                <li class="third-level"><a href="#docker">Docker</a></li>
+                <li class="third-level"><a href="#poetry">Poetry</a></li>
+            <li class="second-level"><a href="#arquitetura-de-processamento-de-dados">Arquitetura de Processamento de Dados</a></li>
+                
+            <li class="second-level"><a href="#o-que-e-backend-as-a-service-baas">O que é Backend as a Service (BaaS)?</a></li>
+                
+            <li class="second-level"><a href="#elasticsearch-vs-clickhouse">ElasticSearch vs ClickHouse</a></li>
+                
+                <li class="third-level"><a href="#elasticsearch_1">ElasticSearch</a></li>
+                <li class="third-level"><a href="#clickhouse_1">ClickHouse</a></li>
+            <li class="second-level"><a href="#resumo">Resumo</a></li>
+                
+            <li class="second-level"><a href="#ferramentas-e-tecnologias">Ferramentas e Tecnologias</a></li>
+                
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
-<p>Olá</p></div>
+<h1 id="modulo-11-de-engenharia-de-software-analise-de-dados-com-rstudio">Módulo 11 de Engenharia de Software: Análise de Dados com RStudio<a class="headerlink" href="#modulo-11-de-engenharia-de-software-analise-de-dados-com-rstudio" title="Permanent link">&para;</a></h1>
+<h2 id="introducao">Introdução<a class="headerlink" href="#introducao" title="Permanent link">&para;</a></h2>
+<p>Nesta aula, vamos explorar a análise de dados avançada utilizando o RStudio e diversas ferramentas de suporte. Nosso parceiro, o Boston Consulting Group (BCG), fornecerá arquivos CSV de grande porte para análise. Vamos abordar desde a padronização e normalização dos dados até a construção de uma aplicação de análise de dados utilizando diversas tecnologias.</p>
+<h2 id="ferramentas-utilizadas">Ferramentas Utilizadas<a class="headerlink" href="#ferramentas-utilizadas" title="Permanent link">&para;</a></h2>
+<h3 id="rstudio">RStudio<a class="headerlink" href="#rstudio" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Descrição</strong>: Ambiente de desenvolvimento integrado (IDE) para a linguagem de programação R.</li>
+<li><strong>Uso</strong>: Análise de dados, geração de relatórios e visualizações.</li>
+</ul>
+<h3 id="rmarkdown">RMarkdown<a class="headerlink" href="#rmarkdown" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Descrição</strong>: Ferramenta para criar documentos dinâmicos com R.</li>
+<li><strong>Uso</strong>: Geração de relatórios para cada arquivo CSV analisado.</li>
+</ul>
+<h3 id="appwrite">Appwrite<a class="headerlink" href="#appwrite" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Descrição</strong>: Plataforma de Backend as a Service (BaaS) que oferece serviços como autenticação, banco de dados, armazenamento e muito mais.</li>
+<li><strong>Uso</strong>: Armazenamento de dados raw e dados processados, utilizando o storage e MariaDB.</li>
+</ul>
+<h3 id="mariadb">MariaDB<a class="headerlink" href="#mariadb" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Descrição</strong>: Sistema de gerenciamento de banco de dados relacional.</li>
+<li><strong>Uso</strong>: Armazenamento de dados processados (dados working).</li>
+</ul>
+<h3 id="elasticsearch">ElasticSearch<a class="headerlink" href="#elasticsearch" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Descrição</strong>: Motor de busca e análise distribuído e de código aberto.</li>
+<li><strong>Uso</strong>: Indexação e busca avançada dos dados processados.</li>
+</ul>
+<h3 id="clickhouse">ClickHouse<a class="headerlink" href="#clickhouse" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Descrição</strong>: Sistema de gerenciamento de banco de dados orientado a colunas, de código aberto, para consultas analíticas em tempo real.</li>
+<li><strong>Uso</strong>: Armazenamento e análise de dados processados (dados trusted).</li>
+</ul>
+<h3 id="streamlit">Streamlit<a class="headerlink" href="#streamlit" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Descrição</strong>: Framework de código aberto para a criação de aplicações web interativas em Python.</li>
+<li><strong>Uso</strong>: Construção de uma aplicação de análise de dados (DataApp).</li>
+</ul>
+<h3 id="apache-spark">Apache Spark<a class="headerlink" href="#apache-spark" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Descrição</strong>: Motor de análise unificada para processamento de dados em grande escala.</li>
+<li><strong>Uso</strong>: Processamento e predição de dados em produção.</li>
+</ul>
+<h3 id="docker">Docker<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Descrição</strong>: Plataforma para desenvolvimento, envio e execução de aplicações em contêineres.</li>
+<li><strong>Uso</strong>: Dockerização da aplicação Streamlit, ElasticSearch e ClickHouse.</li>
+</ul>
+<h3 id="poetry">Poetry<a class="headerlink" href="#poetry" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Descrição</strong>: Gestor de pacotes e dependências para projetos Python.</li>
+<li><strong>Uso</strong>: Gerenciamento de dependências da aplicação Streamlit.</li>
+</ul>
+<h2 id="arquitetura-de-processamento-de-dados">Arquitetura de Processamento de Dados<a class="headerlink" href="#arquitetura-de-processamento-de-dados" title="Permanent link">&para;</a></h2>
+<p><strong>Recebimento dos Arquivos CSV</strong>
+   - Os arquivos CSV fornecidos pelo BCG serão carregados no RStudio para análise inicial.</p>
+<p><strong>Análise e Padronização dos Dados</strong>
+   - Utilizando RStudio, os dados serão ajustados e padronizados.
+   - Relatórios serão gerados em RMarkdown para cada arquivo CSV.</p>
+<p><strong>Armazenamento dos Dados Raw</strong>
+   - Os arquivos CSV originais serão armazenados no storage do Appwrite.</p>
+<p><strong>Normalização e Processamento dos Dados</strong>
+   - Os dados serão normalizados e processados no RStudio.
+   - Dados processados (dados working) serão armazenados no MariaDB do Appwrite.</p>
+<p><strong>Indexação e Armazenamento de Dados Trusted</strong>
+   - Um contêiner Docker do ElasticSearch será configurado para indexação e busca avançada.
+   - Alternativamente, um contêiner Docker do ClickHouse será configurado para armazenamento e análise de dados processados.
+   - Dados do MariaDB serão indexados no ElasticSearch ou armazenados no ClickHouse.</p>
+<p><strong>Construção da Aplicação DataApp</strong>
+   - Utilizando Streamlit, uma aplicação interativa será desenvolvida para consumir dados do MariaDB, ElasticSearch e ClickHouse.
+   - A aplicação será dockerizada e gerenciada com Poetry.</p>
+<p><strong>Processamento com Apache Spark</strong>
+   - Apache Spark será utilizado para realizar predições com os dados em produção.</p>
+<h2 id="o-que-e-backend-as-a-service-baas">O que é Backend as a Service (BaaS)?<a class="headerlink" href="#o-que-e-backend-as-a-service-baas" title="Permanent link">&para;</a></h2>
+<p>Backend as a Service (BaaS) é um modelo de serviço que fornece uma infraestrutura de backend pronta para uso, permitindo que desenvolvedores se concentrem no desenvolvimento do frontend e na lógica de negócios. O BaaS oferece serviços como autenticação, banco de dados, armazenamento de arquivos, notificações push, entre outros, eliminando a necessidade de gerenciar servidores e infraestrutura.</p>
+<h2 id="elasticsearch-vs-clickhouse">ElasticSearch vs ClickHouse<a class="headerlink" href="#elasticsearch-vs-clickhouse" title="Permanent link">&para;</a></h2>
+<h3 id="elasticsearch_1">ElasticSearch<a class="headerlink" href="#elasticsearch_1" title="Permanent link">&para;</a></h3>
+<p><strong>Descrição</strong>: Motor de busca e análise distribuído, ideal para indexação e busca avançada.
+<strong>Vantagens</strong>: 
+  - Excelente para buscas textuais e análises em tempo real.
+  - Suporte robusto para consultas complexas e agregações.
+<strong>Desvantagens</strong>:
+  - Pode ser mais complexo de configurar e gerenciar para grandes volumes de dados.</p>
+<h3 id="clickhouse_1">ClickHouse<a class="headerlink" href="#clickhouse_1" title="Permanent link">&para;</a></h3>
+<p><strong>Descrição</strong>: Sistema de gerenciamento de banco de dados orientado a colunas, otimizado para consultas analíticas em tempo real.
+<strong>Vantagens</strong>:
+  - Desempenho extremamente rápido para consultas analíticas.
+  - Otimizado para grandes volumes de dados e consultas de leitura intensiva.
+<strong>Desvantagens</strong>:
+  - Menos adequado para buscas textuais complexas comparado ao ElasticSearch.</p>
+<h2 id="resumo">Resumo<a class="headerlink" href="#resumo" title="Permanent link">&para;</a></h2>
+<p>Nesta aula, abordamos a análise de dados avançada utilizando RStudio e diversas ferramentas de suporte. Utilizamos o Appwrite como nossa plataforma de BaaS para armazenamento e gerenciamento de dados, MariaDB para dados processados, ElasticSearch e ClickHouse para indexação e análise de dados trusted, e Streamlit para construção de uma aplicação interativa. O processamento de dados em produção será realizado com Apache Spark, e a aplicação será dockerizada e gerenciada com Poetry.</p>
+<p>Toda a arquitetura será criada com Docker e rodará on-premise, mas poderá ser facilmente integrada em uma nuvem ajustando os ambientes de conexão (envs).</p>
+<h2 id="ferramentas-e-tecnologias">Ferramentas e Tecnologias<a class="headerlink" href="#ferramentas-e-tecnologias" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Ferramenta</th>
+<th>Descrição</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RStudio</strong></td>
+<td>IDE para R</td>
+<td>Análise de dados, geração de relatórios</td>
+</tr>
+<tr>
+<td><strong>RMarkdown</strong></td>
+<td>Ferramenta para documentos dinâmicos</td>
+<td>Geração de relatórios</td>
+</tr>
+<tr>
+<td><strong>Appwrite</strong></td>
+<td>Plataforma de BaaS</td>
+<td>Armazenamento de dados raw e processados</td>
+</tr>
+<tr>
+<td><strong>MariaDB</strong></td>
+<td>Sistema de gerenciamento de banco de dados relacional</td>
+<td>Armazenamento de dados processados</td>
+</tr>
+<tr>
+<td><strong>ElasticSearch</strong></td>
+<td>Motor de busca e análise distribuído</td>
+<td>Indexação e busca avançada dos dados</td>
+</tr>
+<tr>
+<td><strong>ClickHouse</strong></td>
+<td>Sistema de gerenciamento de banco de dados orientado a colunas</td>
+<td>Armazenamento e análise de dados processados</td>
+</tr>
+<tr>
+<td><strong>Streamlit</strong></td>
+<td>Framework para criação de aplicações web interativas</td>
+<td>Construção de uma aplicação de análise de dados (DataApp)</td>
+</tr>
+<tr>
+<td><strong>Apache Spark</strong></td>
+<td>Motor de análise unificada para processamento de dados em grande escala</td>
+<td>Processamento e predição de dados</td>
+</tr>
+<tr>
+<td><strong>Docker</strong></td>
+<td>Plataforma para desenvolvimento, envio e execução de aplicações em contêineres</td>
+<td>Dockerização da aplicação Streamlit, ElasticSearch e ClickHouse</td>
+</tr>
+<tr>
+<td><strong>Poetry</strong></td>
+<td>Gestor de pacotes e dependências para projetos Python</td>
+<td>Gerenciamento de dependências da aplicação Streamlit</td>
+</tr>
+</tbody>
+</table></div>
         
         
     </div>
