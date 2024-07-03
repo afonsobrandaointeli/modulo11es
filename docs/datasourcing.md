@@ -4,6 +4,8 @@
 
 Nesta aula, vamos explorar a análise de dados avançada utilizando o RStudio e diversas ferramentas de suporte. Nosso parceiro, o Boston Consulting Group (BCG), fornecerá arquivos CSV de grande porte para análise. Vamos abordar desde a padronização e normalização dos dados até a construção de uma aplicação de análise de dados utilizando diversas tecnologias.
 
+Utilizaremos o conceito de processamento de dados "Raw", "Working" e "Trusted".
+
 ## Ferramentas Utilizadas
 
 ### RStudio
@@ -95,10 +97,6 @@ Backend as a Service (BaaS) é um modelo de serviço que fornece uma infraestrut
   - Otimizado para grandes volumes de dados e consultas de leitura intensiva.
 **Desvantagens**:
   - Menos adequado para buscas textuais complexas comparado ao ElasticSearch.
-
-## Resumo
-
-Nesta aula, abordamos a análise de dados avançada utilizando RStudio e diversas ferramentas de suporte. Utilizamos o Appwrite como nossa plataforma de BaaS para armazenamento e gerenciamento de dados, MariaDB para dados processados, ElasticSearch e ClickHouse para indexação e análise de dados trusted, e Streamlit para construção de uma aplicação interativa. O processamento de dados em produção será realizado com Apache Spark, e a aplicação será dockerizada e gerenciada com Poetry.
 
 Toda a arquitetura será criada com Docker e rodará on-premise, mas poderá ser facilmente integrada em uma nuvem ajustando os ambientes de conexão (envs).
 
