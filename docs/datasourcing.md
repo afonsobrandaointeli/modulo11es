@@ -6,6 +6,10 @@ Nesta aula, vamos explorar a análise de dados avançada utilizando o RStudio e 
 
 Utilizaremos o conceito de processamento de dados "Raw", "Working" e "Trusted".
 
+## Arquitetura e Ferramentas
+
+![image](https://res.cloudinary.com/dyhjjms8y/image/upload/v1720194394/Captura_de_tela_2024-07-05_124607_gfz5dt.png)
+
 ## Ferramentas Utilizadas
 
 ### RStudio

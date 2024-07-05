@@ -1,7 +1,3 @@
-### Arquitetura e Ferramentas
-
-![image](https://res.cloudinary.com/dyhjjms8y/image/upload/v1720194394/Captura_de_tela_2024-07-05_124607_gfz5dt.png)
-
 ### Agosto
 <a href="datasourcing" class="btn btn-primary" style="width: 100%; margin: 10px;">Data Sourcing e Data Analysis com R Studio</a>
 <a href="arquitetura1" class="btn btn-primary" style="width: 100%; margin: 10px;">Arquitetura e Governança de Dados na Nuvem 1</a>
