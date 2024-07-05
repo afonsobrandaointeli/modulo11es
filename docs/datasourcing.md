@@ -24,7 +24,7 @@ Utilizaremos o conceito de processamento de dados "Raw", "Working" e "Trusted".
 - **Descrição**: Plataforma de Backend as a Service (BaaS) que oferece serviços como autenticação, banco de dados, armazenamento e muito mais.
 - **Uso**: Armazenamento de dados raw e dados processados, utilizando o storage e MariaDB.
 
-### MariaDB
+### PostgreSQL
 - **Descrição**: Sistema de gerenciamento de banco de dados relacional.
 - **Uso**: Armazenamento de dados processados (dados working).
 
