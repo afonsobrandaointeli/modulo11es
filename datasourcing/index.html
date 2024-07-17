@@ -195,11 +195,584 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#data-sourcing-e-data-analysis-com-r-studio">Data Sourcing e Data Analysis com R Studio</a></li>
+            <li class="second-level"><a href="#autoestudos">Autoestudos</a></li>
+                
+        <li class="first-level "><a href="#introducao-a-linguagem-r">Introdução à Linguagem R</a></li>
+            <li class="second-level"><a href="#o-que-e-r">O que é R?</a></li>
+                
+            <li class="second-level"><a href="#caracteristicas-principais">Características Principais</a></li>
+                
+            <li class="second-level"><a href="#estrutura-basica-da-linguagem">Estrutura Básica da Linguagem</a></li>
+                
+                <li class="third-level"><a href="#objetos-e-variaveis">Objetos e Variáveis</a></li>
+                <li class="third-level"><a href="#tipos-de-dados">Tipos de Dados</a></li>
+                <li class="third-level"><a href="#funcoes">Funções</a></li>
+                <li class="third-level"><a href="#controle-de-fluxo">Controle de Fluxo</a></li>
+            <li class="second-level"><a href="#importacao-e-manipulacao-de-dados">Importação e Manipulação de Dados</a></li>
+                
+                <li class="third-level"><a href="#importacao-de-dados">Importação de Dados</a></li>
+                <li class="third-level"><a href="#manipulacao-de-dados">Manipulação de Dados</a></li>
+            <li class="second-level"><a href="#visualizacao-de-dados">Visualização de Dados</a></li>
+                
+            <li class="second-level"><a href="#pacotes-e-extensoes">Pacotes e Extensões</a></li>
+                
+        <li class="first-level "><a href="#analise-exploratoria-avancada-com-r">Análise Exploratória Avançada com R</a></li>
+            <li class="second-level"><a href="#pre-requisitos">Pré-requisitos</a></li>
+                
+            <li class="second-level"><a href="#conteudo-da-aula">Conteúdo da Aula</a></li>
+                
+            <li class="second-level"><a href="#preparacao-do-ambiente">Preparação do Ambiente</a></li>
+                
+            <li class="second-level"><a href="#importacao-e-limpeza-de-dados">Importação e Limpeza de Dados</a></li>
+                
+            <li class="second-level"><a href="#analise-univariada">Análise Univariada</a></li>
+                
+            <li class="second-level"><a href="#analise-bivariada">Análise Bivariada</a></li>
+                
+            <li class="second-level"><a href="#analise-multivariada">Análise Multivariada</a></li>
+                
+            <li class="second-level"><a href="#visualizacao-avancada">Visualização Avançada</a></li>
+                
+            <li class="second-level"><a href="#estatisticas-avancadas">Estatísticas Avançadas</a></li>
+                
+        <li class="first-level "><a href="#por-que-fazer-analise-exploratoria-avancada-com-r-em-dados-grandes">Por que Fazer Análise Exploratória Avançada com R em Dados Grandes?</a></li>
+            <li class="second-level"><a href="#introducao">Introdução</a></li>
+                
+            <li class="second-level"><a href="#1-ferramentas-poderosas-de-manipulacao-de-dados">1. Ferramentas Poderosas de Manipulação de Dados</a></li>
+                
+                <li class="third-level"><a href="#dplyr-e-datatable">dplyr e data.table</a></li>
+            <li class="second-level"><a href="#2-visualizacao-de-dados-escalavel">2. Visualização de Dados Escalável</a></li>
+                
+                <li class="third-level"><a href="#ggplot2-e-plotly">ggplot2 e plotly</a></li>
+            <li class="second-level"><a href="#3-suporte-para-computacao-paralela">3. Suporte para Computação Paralela</a></li>
+                
+                <li class="third-level"><a href="#parallel-e-future">parallel e future</a></li>
+            <li class="second-level"><a href="#4-integracao-com-big-data">4. Integração com Big Data</a></li>
+                
+                <li class="third-level"><a href="#sparklyr-e-dbi">sparklyr e DBI</a></li>
+                <li class="third-level"><a href="#exemplo-de-integracao-com-spark-usando-docker">Exemplo de Integração com Spark usando Docker</a></li>
+            <li class="second-level"><a href="#5-capacidades-estatisticas-avancadas">5. Capacidades Estatísticas Avançadas</a></li>
+                
+                <li class="third-level"><a href="#caret-e-mlr">caret e mlr</a></li>
+            <li class="second-level"><a href="#conclusao">Conclusão</a></li>
+                
+            <li class="second-level"><a href="#referencias">Referências</a></li>
+                
+        <li class="first-level "><a href="#mao-na-massa-analise-exploratoria-de-dados-com-o-conjunto-de-dados-wine">Mão na Massa! - Análise Exploratória de Dados com o Conjunto de Dados Wine</a></li>
+            <li class="second-level"><a href="#introducao_1">Introdução</a></li>
+                
+            <li class="second-level"><a href="#passo-1-preparacao-do-ambiente">Passo 1: Preparação do Ambiente</a></li>
+                
+            <li class="second-level"><a href="#passo-2-carregar-os-dados">Passo 2: Carregar os Dados</a></li>
+                
+            <li class="second-level"><a href="#passo-3-entender-a-estrutura-dos-dados">Passo 3: Entender a Estrutura dos Dados</a></li>
+                
+            <li class="second-level"><a href="#passo-4-verificar-dados-faltantes">Passo 4: Verificar Dados Faltantes</a></li>
+                
+            <li class="second-level"><a href="#passo-5-analise-univariada">Passo 5: Análise Univariada</a></li>
+                
+                <li class="third-level"><a href="#distribuicao-da-qualidade-do-vinho">Distribuição da Qualidade do Vinho</a></li>
+                <li class="third-level"><a href="#distribuicao-de-variaveis-numericas">Distribuição de Variáveis Numéricas</a></li>
+            <li class="second-level"><a href="#passo-6-analise-bivariada">Passo 6: Análise Bivariada</a></li>
+                
+                <li class="third-level"><a href="#relacao-entre-alcool-e-qualidade">Relação entre Álcool e Qualidade</a></li>
+                <li class="third-level"><a href="#boxplot-da-qualidade-por-tipo-de-vinho">Boxplot da Qualidade por Tipo de Vinho</a></li>
+            <li class="second-level"><a href="#passo-7-analise-multivariada">Passo 7: Análise Multivariada</a></li>
+                
+                <li class="third-level"><a href="#matriz-de-correlacao">Matriz de Correlação</a></li>
+                <li class="third-level"><a href="#scatterplot-matrix">Scatterplot Matrix</a></li>
+            <li class="second-level"><a href="#passo-8-conclusoes-e-insights">Passo 8: Conclusões e Insights</a></li>
+                
+            <li class="second-level"><a href="#referencias_1">Referências</a></li>
+                
+            <li class="second-level"><a href="#qual-a-missao-para-o-artefato">Qual a Missão para o Artefato?</a></li>
+                
+                <li class="third-level"><a href="#uso-de-computacao-distribuida-com-spark">Uso de Computação Distribuída com Spark</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
-</div>
+<h1 id="data-sourcing-e-data-analysis-com-r-studio">Data Sourcing e Data Analysis com R Studio<a class="headerlink" href="#data-sourcing-e-data-analysis-com-r-studio" title="Permanent link">&para;</a></h1>
+<h2 id="autoestudos">Autoestudos<a class="headerlink" href="#autoestudos" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://r4ds.had.co.nz/exploratory-data-analysis.html">Notebook de Datasourcing</a></td>
+<td>Documentação</td>
+</tr>
+<tr>
+<td><a href="https://www.geeksforgeeks.org/exploratory-data-analysis-in-r-programming/">Exploratory Data Analysis in R Programming</a></td>
+<td>Documentação</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="introducao-a-linguagem-r">Introdução à Linguagem R<a class="headerlink" href="#introducao-a-linguagem-r" title="Permanent link">&para;</a></h1>
+<h2 id="o-que-e-r">O que é R?<a class="headerlink" href="#o-que-e-r" title="Permanent link">&para;</a></h2>
+<p>R é uma linguagem de programação e um ambiente de software livre para computação estatística e gráficos. Foi desenvolvido por Ross Ihaka e Robert Gentleman na Universidade de Auckland, Nova Zelândia, e é amplamente utilizado por estatísticos e analistas de dados para desenvolver software estatístico e realizar análise de dados.</p>
+<h2 id="caracteristicas-principais">Características Principais<a class="headerlink" href="#caracteristicas-principais" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Interativa</strong>: R é uma linguagem interpretada, o que significa que você pode executar comandos um de cada vez e ver os resultados imediatamente.</li>
+<li><strong>Extensível</strong>: Há uma vasta quantidade de pacotes adicionais disponíveis que podem ser instalados para estender a funcionalidade do R.</li>
+<li><strong>Gráficos de Alta Qualidade</strong>: R possui ferramentas poderosas para a criação de gráficos de alta qualidade e visualizações de dados.</li>
+<li><strong>Comunidade Ativa</strong>: A comunidade R é grande e ativa, oferecendo suporte e recursos através de fóruns, blogs, e documentação.</li>
+</ul>
+<h2 id="estrutura-basica-da-linguagem">Estrutura Básica da Linguagem<a class="headerlink" href="#estrutura-basica-da-linguagem" title="Permanent link">&para;</a></h2>
+<h3 id="objetos-e-variaveis">Objetos e Variáveis<a class="headerlink" href="#objetos-e-variaveis" title="Permanent link">&para;</a></h3>
+<p>R é uma linguagem orientada a objetos, e quase tudo em R é um objeto. Você pode criar variáveis para armazenar dados e manipular esses dados usando várias funções.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Atribuição de valores a variáveis</span>
+<span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">10</span>
+<span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">5</span>
+
+<span class="c1"># Operações aritméticas</span>
+<span class="n">z</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="w">  </span><span class="c1"># Saída: 15</span>
+</code></pre></div>
+
+<h3 id="tipos-de-dados">Tipos de Dados<a class="headerlink" href="#tipos-de-dados" title="Permanent link">&para;</a></h3>
+<p>R suporta vários tipos de dados básicos, incluindo:</p>
+<ul>
+<li><strong>Números</strong>: inteiros e números de ponto flutuante.</li>
+<li><strong>Caracteres</strong>: strings.</li>
+<li><strong>Vetores</strong>: uma sequência de dados do mesmo tipo.</li>
+<li><strong>Matrizes</strong>: uma coleção bidimensional de dados.</li>
+<li><strong>Data Frames</strong>: uma tabela de dados, onde cada coluna pode conter diferentes tipos de dados.</li>
+<li><strong>Listas</strong>: uma coleção de objetos que podem ser de tipos diferentes.</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Exemplos de tipos de dados</span>
+<span class="n">num</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">42</span>
+<span class="n">char</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;Olá, mundo!&quot;</span>
+<span class="n">vetor</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">)</span>
+<span class="n">matriz</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
+<span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">Nomes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Pedro&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">Idades</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">28</span><span class="p">,</span><span class="w"> </span><span class="m">34</span><span class="p">))</span>
+<span class="n">lista</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="w"> </span><span class="n">char</span><span class="p">,</span><span class="w"> </span><span class="n">vetor</span><span class="p">,</span><span class="w"> </span><span class="n">matriz</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="funcoes">Funções<a class="headerlink" href="#funcoes" title="Permanent link">&para;</a></h3>
+<p>Funções são uma parte essencial de R e permitem encapsular código que pode ser reutilizado. Você pode usar funções integradas ou criar suas próprias funções.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Função simples para somar dois números</span>
+<span class="n">soma</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">return</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">resultado</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">soma</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">resultado</span><span class="p">)</span><span class="w">  </span><span class="c1"># Saída: 7</span>
+</code></pre></div>
+
+<h3 id="controle-de-fluxo">Controle de Fluxo<a class="headerlink" href="#controle-de-fluxo" title="Permanent link">&para;</a></h3>
+<p>R suporta estruturas de controle de fluxo, como condicionais (<code>if</code>, <code>else</code>) e loops (<code>for</code>, <code>while</code>).</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Condicional if-else</span>
+<span class="nf">if </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="s">&quot;x é maior que y&quot;</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="n">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="s">&quot;x não é maior que y&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Loop for</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="importacao-e-manipulacao-de-dados">Importação e Manipulação de Dados<a class="headerlink" href="#importacao-e-manipulacao-de-dados" title="Permanent link">&para;</a></h2>
+<h3 id="importacao-de-dados">Importação de Dados<a class="headerlink" href="#importacao-de-dados" title="Permanent link">&para;</a></h3>
+<p>R facilita a importação de dados de várias fontes, como arquivos CSV, Excel, bancos de dados e APIs.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Importar dados de um arquivo CSV</span>
+<span class="n">dados</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;dados.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Visualizar as primeiras linhas do data frame</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">dados</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="manipulacao-de-dados">Manipulação de Dados<a class="headerlink" href="#manipulacao-de-dados" title="Permanent link">&para;</a></h3>
+<p>A manipulação de dados em R pode ser realizada usando pacotes como <code>dplyr</code> e <code>tidyr</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Carregar o pacote dplyr</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+
+<span class="c1"># Selecionar colunas e filtrar linhas</span>
+<span class="n">dados_filtrados</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dados</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">select</span><span class="p">(</span><span class="n">Nome</span><span class="p">,</span><span class="w"> </span><span class="n">Idade</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">Idade</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">30</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="visualizacao-de-dados">Visualização de Dados<a class="headerlink" href="#visualizacao-de-dados" title="Permanent link">&para;</a></h2>
+<p>R possui pacotes poderosos para visualização de dados, como <code>ggplot2</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Carregar o pacote ggplot2</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+
+<span class="c1"># Criar um gráfico de dispersão</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">dados</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Idade</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Salario</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Idade vs. Salário&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Idade&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Salário&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="pacotes-e-extensoes">Pacotes e Extensões<a class="headerlink" href="#pacotes-e-extensoes" title="Permanent link">&para;</a></h2>
+<p>Uma das grandes vantagens de R é a sua extensibilidade através de pacotes. Você pode instalar pacotes do CRAN (Comprehensive R Archive Network) para adicionar novas funcionalidades ao R.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Instalar e carregar um pacote</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;tidyverse&quot;</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+</code></pre></div>
+
+<h1 id="analise-exploratoria-avancada-com-r">Análise Exploratória Avançada com R<a class="headerlink" href="#analise-exploratoria-avancada-com-r" title="Permanent link">&para;</a></h1>
+<h2 id="pre-requisitos">Pré-requisitos<a class="headerlink" href="#pre-requisitos" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Conhecimento básico de R e RStudio</li>
+<li>Conhecimento básico de EDA</li>
+</ul>
+<h2 id="conteudo-da-aula">Conteúdo da Aula<a class="headerlink" href="#conteudo-da-aula" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#preparação-do-ambiente">Preparação do Ambiente</a></li>
+<li><a href="#importação-e-limpeza-de-dados">Importação e Limpeza de Dados</a></li>
+<li><a href="#análise-univariada">Análise Univariada</a></li>
+<li><a href="#análise-bivariada">Análise Bivariada</a></li>
+<li><a href="#análise-multivariada">Análise Multivariada</a></li>
+<li><a href="#visualização-avançada">Visualização Avançada</a></li>
+<li><a href="#estatísticas-avançadas">Estatísticas Avançadas</a></li>
+</ol>
+<h2 id="preparacao-do-ambiente">Preparação do Ambiente<a class="headerlink" href="#preparacao-do-ambiente" title="Permanent link">&para;</a></h2>
+<p>Para começar, precisamos preparar nosso ambiente de trabalho instalando e carregando os pacotes necessários.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Instalar pacotes necessários</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;tidyverse&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;data.table&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;GGally&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;corrplot&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;gridExtra&quot;</span><span class="p">))</span>
+
+<span class="c1"># Carregar pacotes</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">data.table</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">GGally</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">corrplot</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">gridExtra</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="importacao-e-limpeza-de-dados">Importação e Limpeza de Dados<a class="headerlink" href="#importacao-e-limpeza-de-dados" title="Permanent link">&para;</a></h2>
+<p>Nesta seção, vamos importar nossos dados e realizar a limpeza necessária.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Importar dados</span>
+<span class="n">data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">fread</span><span class="p">(</span><span class="s">&quot;path/to/your/data.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Exibir as primeiras linhas dos dados</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Verificar dados faltantes</span>
+<span class="nf">sum</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+<span class="c1"># Limpeza de dados (exemplo: remover linhas com dados faltantes)</span>
+<span class="n">data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">na.omit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="analise-univariada">Análise Univariada<a class="headerlink" href="#analise-univariada" title="Permanent link">&para;</a></h2>
+<p>A análise univariada envolve a descrição de cada variável individualmente.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Distribuição de uma variável numérica</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variable</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_histogram</span><span class="p">(</span><span class="n">binwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;black&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Distribuição de Variable&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Variable&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Frequência&quot;</span><span class="p">)</span>
+
+<span class="c1"># Medidas de tendência central e dispersão</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">variable</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="analise-bivariada">Análise Bivariada<a class="headerlink" href="#analise-bivariada" title="Permanent link">&para;</a></h2>
+<p>A análise bivariada examina a relação entre duas variáveis.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Scatter plot para duas variáveis numéricas</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variable1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variable2</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Relação entre Variable1 e Variable2&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Variable1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Variable2&quot;</span><span class="p">)</span>
+
+<span class="c1"># Boxplot para uma variável categórica e uma numérica</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">categorical_variable</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numeric_variable</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_boxplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Boxplot de Categorical Variable e Numeric Variable&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Categorical Variable&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Numeric Variable&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="analise-multivariada">Análise Multivariada<a class="headerlink" href="#analise-multivariada" title="Permanent link">&para;</a></h2>
+<p>A análise multivariada considera múltiplas variáveis simultaneamente.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Matriz de correlação</span>
+<span class="n">cor_matrix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cor</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">select_if</span><span class="p">(</span><span class="n">is.numeric</span><span class="p">))</span>
+<span class="nf">corrplot</span><span class="p">(</span><span class="n">cor_matrix</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;circle&quot;</span><span class="p">)</span>
+
+<span class="c1"># Scatterplot matrix</span>
+<span class="nf">ggpairs</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">select_if</span><span class="p">(</span><span class="n">is.numeric</span><span class="p">))</span>
+</code></pre></div>
+
+<h2 id="visualizacao-avancada">Visualização Avançada<a class="headerlink" href="#visualizacao-avancada" title="Permanent link">&para;</a></h2>
+<p>Vamos explorar técnicas avançadas de visualização para EDA.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Densidade 2D para grandes conjuntos de dados</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variable1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variable2</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_bin2d</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">scale_fill_gradient</span><span class="p">(</span><span class="n">low</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;white&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">high</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Densidade 2D de Variable1 e Variable2&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Variable1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Variable2&quot;</span><span class="p">)</span>
+
+<span class="c1"># Facet wrap para visualização de subgrupos</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variable</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_histogram</span><span class="p">(</span><span class="n">binwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;black&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="w"> </span><span class="n">categorical_variable</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Distribuição de Variable por Categoria&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Variable&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Frequência&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="estatisticas-avancadas">Estatísticas Avançadas<a class="headerlink" href="#estatisticas-avancadas" title="Permanent link">&para;</a></h2>
+<p>Utilizaremos técnicas estatísticas avançadas para aprofundar nossa análise.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Regressão linear simples</span>
+<span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">variable2</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">variable1</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="c1"># Análise de componentes principais (PCA)</span>
+<span class="n">pca</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">prcomp</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">select_if</span><span class="p">(</span><span class="n">is.numeric</span><span class="p">),</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">pca</span><span class="p">)</span>
+
+<span class="c1"># Visualização dos componentes principais</span>
+<span class="nf">autoplot</span><span class="p">(</span><span class="n">pca</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;categorical_variable&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<h1 id="por-que-fazer-analise-exploratoria-avancada-com-r-em-dados-grandes">Por que Fazer Análise Exploratória Avançada com R em Dados Grandes?<a class="headerlink" href="#por-que-fazer-analise-exploratoria-avancada-com-r-em-dados-grandes" title="Permanent link">&para;</a></h1>
+<h2 id="introducao">Introdução<a class="headerlink" href="#introducao" title="Permanent link">&para;</a></h2>
+<p>A análise exploratória de dados (EDA) é um passo fundamental no processo de análise de dados. Quando se trata de grandes volumes de dados, a importância de uma EDA avançada se torna ainda mais crucial. A linguagem R é uma das ferramentas mais poderosas e versáteis disponíveis para realizar EDA em grandes conjuntos de dados. Aqui estão alguns motivos pelos quais você deve considerar fazer análise exploratória avançada com R em dados grandes.</p>
+<h2 id="1-ferramentas-poderosas-de-manipulacao-de-dados">1. Ferramentas Poderosas de Manipulação de Dados<a class="headerlink" href="#1-ferramentas-poderosas-de-manipulacao-de-dados" title="Permanent link">&para;</a></h2>
+<h3 id="dplyr-e-datatable"><strong><code>dplyr</code> e <code>data.table</code></strong><a class="headerlink" href="#dplyr-e-datatable" title="Permanent link">&para;</a></h3>
+<p>R oferece pacotes como <code>dplyr</code> e <code>data.table</code> que são otimizados para manipulação de dados rápida e eficiente, mesmo com conjuntos de dados grandes. Eles permitem realizar operações complexas de transformação de dados com uma sintaxe simples e intuitiva.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Exemplo de manipulação de dados com dplyr</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<span class="n">dados_grandes</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">salario</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">50000</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">group_by</span><span class="p">(</span><span class="n">departamento</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">summarise</span><span class="p">(</span><span class="n">media_salario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">salario</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span>
+</code></pre></div>
+
+<h2 id="2-visualizacao-de-dados-escalavel">2. Visualização de Dados Escalável<a class="headerlink" href="#2-visualizacao-de-dados-escalavel" title="Permanent link">&para;</a></h2>
+<h3 id="ggplot2-e-plotly"><strong><code>ggplot2</code> e <code>plotly</code></strong><a class="headerlink" href="#ggplot2-e-plotly" title="Permanent link">&para;</a></h3>
+<p>A visualização é uma parte essencial da EDA. R, com pacotes como <code>ggplot2</code> e <code>plotly</code>, permite criar visualizações detalhadas e interativas que podem lidar com grandes volumes de dados. Estas visualizações ajudam a identificar padrões, tendências e anomalias que não são facilmente visíveis em tabelas de dados.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Exemplo de visualização com ggplot2</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">dados_grandes</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">idade</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">salario</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Relação entre Idade e Salário&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="3-suporte-para-computacao-paralela">3. Suporte para Computação Paralela<a class="headerlink" href="#3-suporte-para-computacao-paralela" title="Permanent link">&para;</a></h2>
+<h3 id="parallel-e-future"><strong><code>parallel</code> e <code>future</code></strong><a class="headerlink" href="#parallel-e-future" title="Permanent link">&para;</a></h3>
+<p>Para conjuntos de dados muito grandes, a computação paralela pode acelerar significativamente o processamento. R possui suporte nativo para computação paralela através de pacotes como <code>parallel</code> e <code>future</code>, permitindo distribuir tarefas em múltiplos núcleos de CPU.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Exemplo de computação paralela com future</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+<span class="nf">plan</span><span class="p">(</span><span class="n">multisession</span><span class="p">,</span><span class="w"> </span><span class="n">workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">)</span>
+<span class="n">resultados</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">future_lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">1e6</span><span class="p">)))</span>
+</code></pre></div>
+
+<h2 id="4-integracao-com-big-data">4. Integração com Big Data<a class="headerlink" href="#4-integracao-com-big-data" title="Permanent link">&para;</a></h2>
+<h3 id="sparklyr-e-dbi"><strong><code>sparklyr</code> e <code>DBI</code></strong><a class="headerlink" href="#sparklyr-e-dbi" title="Permanent link">&para;</a></h3>
+<p>R pode se integrar facilmente com tecnologias de Big Data como Apache Spark através do pacote <code>sparklyr</code>, e também com bancos de dados SQL através do pacote <code>DBI</code>. Isso permite que você realize EDA em dados armazenados em sistemas distribuídos ou em bancos de dados de grande escala.</p>
+<h3 id="exemplo-de-integracao-com-spark-usando-docker">Exemplo de Integração com Spark usando Docker<a class="headerlink" href="#exemplo-de-integracao-com-spark-usando-docker" title="Permanent link">&para;</a></h3>
+<h4 id="passo-1-configurar-o-ambiente-docker">Passo 1: Configurar o Ambiente Docker<a class="headerlink" href="#passo-1-configurar-o-ambiente-docker" title="Permanent link">&para;</a></h4>
+<p>Crie um arquivo <code>docker-compose.yml</code> para configurar um cluster Spark com Hadoop.</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.7&#39;</span>
+
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">spark-master</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bde2020/spark-master:latest</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spark-master</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8080:8080&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;7077:7077&quot;</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INIT_DAEMON_STEP=setup_spark</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spark</span>
+
+<span class="w">  </span><span class="nt">spark-worker-1</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bde2020/spark-worker:latest</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spark-worker-1</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spark-master</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;SPARK_MASTER=spark://spark-master:7077&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INIT_DAEMON_STEP=setup_worker</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spark</span>
+
+<span class="nt">networks</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">spark</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bridge</span>
+</code></pre></div>
+
+<h4 id="passo-2-iniciar-o-cluster-spark">Passo 2: Iniciar o Cluster Spark<a class="headerlink" href="#passo-2-iniciar-o-cluster-spark" title="Permanent link">&para;</a></h4>
+<p>Inicie o cluster Spark usando Docker Compose.</p>
+<div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+
+<h4 id="passo-3-conectar-ao-spark-no-r">Passo 3: Conectar ao Spark no R<a class="headerlink" href="#passo-3-conectar-ao-spark-no-r" title="Permanent link">&para;</a></h4>
+<p>Utilize o pacote <code>sparklyr</code> para conectar ao cluster Spark.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Instalar e carregar pacotes necessários</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;sparklyr&quot;</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">sparklyr</span><span class="p">)</span>
+
+<span class="c1"># Conectar ao cluster Spark</span>
+<span class="n">sc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">spark_connect</span><span class="p">(</span><span class="n">master</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;spark://localhost:7077&quot;</span><span class="p">)</span>
+
+<span class="c1"># Copiar dados para o Spark</span>
+<span class="n">dados_spark</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">copy_to</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span><span class="w"> </span><span class="n">dados_grandes</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dados_grandes_tbl&quot;</span><span class="p">)</span>
+
+<span class="c1"># Realizar operações no Spark</span>
+<span class="n">dados_spark</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">salario</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">50000</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">group_by</span><span class="p">(</span><span class="n">departamento</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">summarise</span><span class="p">(</span><span class="n">media_salario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">salario</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">collect</span><span class="p">()</span>
+</code></pre></div>
+
+<h4 id="passo-4-desconectar-do-spark">Passo 4: Desconectar do Spark<a class="headerlink" href="#passo-4-desconectar-do-spark" title="Permanent link">&para;</a></h4>
+<p>Após a análise, desconecte do cluster Spark.</p>
+<div class="codehilite"><pre><span></span><code><span class="nf">spark_disconnect</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="5-capacidades-estatisticas-avancadas">5. Capacidades Estatísticas Avançadas<a class="headerlink" href="#5-capacidades-estatisticas-avancadas" title="Permanent link">&para;</a></h2>
+<h3 id="caret-e-mlr"><strong><code>caret</code> e <code>mlr</code></strong><a class="headerlink" href="#caret-e-mlr" title="Permanent link">&para;</a></h3>
+<p>R é amplamente reconhecido por suas capacidades estatísticas e de machine learning. Pacotes como <code>caret</code> e <code>mlr</code> permitem realizar análises estatísticas avançadas e aplicar algoritmos de machine learning para descobrir insights profundos em grandes volumes de dados.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Exemplo de análise com caret</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">caret</span><span class="p">)</span>
+<span class="n">modelo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">salario</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">.</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dados_grandes</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lm&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">modelo</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h2>
+<p>Nesta aula, exploramos técnicas avançadas de Análise Exploratória de Dados (EDA) usando R. Aprendemos a preparar o ambiente, importar e limpar dados, realizar análises univariadas, bivariadas e multivariadas, criar visualizações avançadas e aplicar estatísticas avançadas. Com essas habilidades, você estará bem equipado para realizar EDA de maneira eficaz e profunda.</p>
+<h2 id="referencias">Referências<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://r4ds.had.co.nz/exploratory-data-analysis.html">Notebook de Datasourcing</a></li>
+<li><a href="https://www.geeksforgeeks.org/exploratory-data-analysis-in-r-programming/">Exploratory Data Analysis in R Programming</a></li>
+<li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
+<li><a href="https://cran.r-project.org/">The Comprehensive R Archive Network (CRAN)</a></li>
+<li><a href="https://www.rdocumentation.org/">R Documentation</a></li>
+<li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
+<li><a href="https://cran.r-project.org/web/packages/dplyr/dplyr.pdf">Data Manipulation with dplyr</a></li>
+<li><a href="https://cran.r-project.org/web/packages/data.table/data.table.pdf">Efficient R programming with data.table</a></li>
+<li><a href="https://ggplot2.tidyverse.org/">ggplot2: Elegant Graphics for Data Analysis</a></li>
+<li><a href="https://spark.rstudio.com/">Apache Spark Integration with R</a></li>
+</ul>
+<h1 id="mao-na-massa-analise-exploratoria-de-dados-com-o-conjunto-de-dados-wine">Mão na Massa! - Análise Exploratória de Dados com o Conjunto de Dados Wine<a class="headerlink" href="#mao-na-massa-analise-exploratoria-de-dados-com-o-conjunto-de-dados-wine" title="Permanent link">&para;</a></h1>
+<h2 id="introducao_1">Introdução<a class="headerlink" href="#introducao_1" title="Permanent link">&para;</a></h2>
+<p>O conjunto de dados de vinhos (<code>wine</code>) é amplamente utilizado para demonstrações de técnicas de análise de dados e machine learning. Ele contém informações químicas sobre diferentes tipos de vinhos e a qualidade atribuída a cada um. Neste tutorial, vamos realizar uma Análise Exploratória de Dados (EDA) completa utilizando a linguagem R.</p>
+<h2 id="passo-1-preparacao-do-ambiente">Passo 1: Preparação do Ambiente<a class="headerlink" href="#passo-1-preparacao-do-ambiente" title="Permanent link">&para;</a></h2>
+<p>Primeiro, vamos preparar nosso ambiente de trabalho, instalando e carregando os pacotes necessários.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Instalar pacotes necessários</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;tidyverse&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;GGally&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;corrplot&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;gridExtra&quot;</span><span class="p">))</span>
+
+<span class="c1"># Carregar pacotes</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">GGally</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">corrplot</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">gridExtra</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="passo-2-carregar-os-dados">Passo 2: Carregar os Dados<a class="headerlink" href="#passo-2-carregar-os-dados" title="Permanent link">&para;</a></h2>
+<p>Vamos carregar o conjunto de dados <code>wine</code>. Supondo que o arquivo esteja em formato CSV, usaremos a função <code>read.csv</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Carregar os dados</span>
+<span class="n">wine_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;path/to/wine.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Exibir as primeiras linhas do data frame</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">wine_data</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="passo-3-entender-a-estrutura-dos-dados">Passo 3: Entender a Estrutura dos Dados<a class="headerlink" href="#passo-3-entender-a-estrutura-dos-dados" title="Permanent link">&para;</a></h2>
+<p>Examinaremos a estrutura dos dados para entender suas características básicas.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Estrutura dos dados</span>
+<span class="nf">str</span><span class="p">(</span><span class="n">wine_data</span><span class="p">)</span>
+
+<span class="c1"># Resumo estatístico das variáveis</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">wine_data</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="passo-4-verificar-dados-faltantes">Passo 4: Verificar Dados Faltantes<a class="headerlink" href="#passo-4-verificar-dados-faltantes" title="Permanent link">&para;</a></h2>
+<p>Verificaremos se há dados faltantes no conjunto de dados.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Verificar dados faltantes</span>
+<span class="nf">sum</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">wine_data</span><span class="p">))</span>
+</code></pre></div>
+
+<h2 id="passo-5-analise-univariada">Passo 5: Análise Univariada<a class="headerlink" href="#passo-5-analise-univariada" title="Permanent link">&para;</a></h2>
+<p>Realizaremos a análise de cada variável individualmente.</p>
+<h3 id="distribuicao-da-qualidade-do-vinho">Distribuição da Qualidade do Vinho<a class="headerlink" href="#distribuicao-da-qualidade-do-vinho" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Histograma da variável &#39;quality&#39;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">quality</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_histogram</span><span class="p">(</span><span class="n">binwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;black&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Distribuição da Qualidade do Vinho&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Qualidade&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Frequência&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="distribuicao-de-variaveis-numericas">Distribuição de Variáveis Numéricas<a class="headerlink" href="#distribuicao-de-variaveis-numericas" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Histograma para cada variável numérica</span>
+<span class="n">numeric_vars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">wine_data</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="o">-</span><span class="n">quality</span><span class="p">)</span>
+<span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lapply</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">numeric_vars</span><span class="p">),</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">,</span><span class="w"> </span><span class="nf">aes_string</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">var</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_histogram</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Distribuição de&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">var</span><span class="p">),</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">var</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Frequência&quot;</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nf">grid.arrange</span><span class="p">(</span><span class="n">grobs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="passo-6-analise-bivariada">Passo 6: Análise Bivariada<a class="headerlink" href="#passo-6-analise-bivariada" title="Permanent link">&para;</a></h2>
+<p>Examinaremos as relações entre pares de variáveis.</p>
+<h3 id="relacao-entre-alcool-e-qualidade">Relação entre Álcool e Qualidade<a class="headerlink" href="#relacao-entre-alcool-e-qualidade" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Scatter plot entre &#39;alcohol&#39; e &#39;quality&#39;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alcohol</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">quality</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Relação entre Álcool e Qualidade&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Álcool&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Qualidade&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="boxplot-da-qualidade-por-tipo-de-vinho">Boxplot da Qualidade por Tipo de Vinho<a class="headerlink" href="#boxplot-da-qualidade-por-tipo-de-vinho" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Supondo que há uma coluna &#39;type&#39; indicando o tipo de vinho</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">wine_data</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="n">quality</span><span class="p">),</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alcohol</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="n">quality</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_boxplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Boxplot da Qualidade por Tipo de Vinho&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Qualidade&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Álcool&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="passo-7-analise-multivariada">Passo 7: Análise Multivariada<a class="headerlink" href="#passo-7-analise-multivariada" title="Permanent link">&para;</a></h2>
+<p>Analisaremos múltiplas variáveis simultaneamente.</p>
+<h3 id="matriz-de-correlacao">Matriz de Correlação<a class="headerlink" href="#matriz-de-correlacao" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Matriz de correlação</span>
+<span class="n">cor_matrix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cor</span><span class="p">(</span><span class="n">wine_data</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">select_if</span><span class="p">(</span><span class="n">is.numeric</span><span class="p">))</span>
+<span class="nf">corrplot</span><span class="p">(</span><span class="n">cor_matrix</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;circle&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="scatterplot-matrix">Scatterplot Matrix<a class="headerlink" href="#scatterplot-matrix" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Scatterplot matrix</span>
+<span class="nf">ggpairs</span><span class="p">(</span><span class="n">wine_data</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">select_if</span><span class="p">(</span><span class="n">is.numeric</span><span class="p">))</span>
+</code></pre></div>
+
+<h2 id="passo-8-conclusoes-e-insights">Passo 8: Conclusões e Insights<a class="headerlink" href="#passo-8-conclusoes-e-insights" title="Permanent link">&para;</a></h2>
+<p>Após a análise, resumimos nossos principais achados:</p>
+<ul>
+<li>A distribuição da qualidade dos vinhos é...</li>
+<li>A relação entre o teor de álcool e a qualidade é...</li>
+<li>Variáveis como ácido cítrico e pH apresentam correlação...</li>
+</ul>
+<h2 id="referencias_1">Referências<a class="headerlink" href="#referencias_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://ggplot2.tidyverse.org/">Documentação do ggplot2</a></li>
+<li><a href="https://dplyr.tidyverse.org/">Guia de Introdução ao dplyr</a></li>
+</ul>
+<h2 id="qual-a-missao-para-o-artefato">Qual a Missão para o Artefato?<a class="headerlink" href="#qual-a-missao-para-o-artefato" title="Permanent link">&para;</a></h2>
+<p>Os grupos deverão realizar uma Análise Exploratória Avançada nos dados que foram fornecidos. Esta análise deve incluir, mas não se limitar a:</p>
+<ul>
+<li>Entender a estrutura dos dados e suas características básicas.</li>
+<li>Realizar uma análise univariada de todas as variáveis.</li>
+<li>Explorar relações bivariadas entre variáveis para identificar possíveis correlações.</li>
+<li>Conduzir uma análise multivariada para entender interações complexas entre variáveis.</li>
+<li>Utilizar visualizações para ilustrar as descobertas e insights obtidos.</li>
+</ul>
+<h3 id="uso-de-computacao-distribuida-com-spark">Uso de Computação Distribuída com Spark<a class="headerlink" href="#uso-de-computacao-distribuida-com-spark" title="Permanent link">&para;</a></h3>
+<p>Caso o conjunto de dados seja muito extenso e torne o processamento em um único computador inviável, os grupos deverão utilizar o Apache Spark como solução de computação distribuída. O Spark permite manipular e processar grandes volumes de dados de maneira eficiente, distribuindo as tarefas em múltiplos nós de computação.</p>
+<p>Utilizem essas ferramentas e técnicas para garantir que a análise seja completa e eficiente, mesmo com conjuntos de dados volumosos. O objetivo final é extrair insights valiosos dos dados fornecidos e apresentar esses insights de forma clara e compreensível.</p></div>
         
         
     </div>
