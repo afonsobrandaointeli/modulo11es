@@ -9,6 +9,11 @@
 
 ---
 
+# Slides
+
+<iframe src="https://docs.google.com/presentation/d/1y0cVhWmuc8Y5KpPol9FG3mHzZ3GWiHB7/embed?start=false&loop=false&delayms=3000" frameborder="0" width="700" height="500" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+
 # Introdução à Linguagem R
 
 ## O que é R?
