@@ -55,45 +55,66 @@ Utilizaremos o conceito de processamento de dados "Raw", "Working" e "Trusted".
 
 ## Ferramentas Utilizadas
 
-### RStudio
+### [RStudio](https://rstudio.com/)
 - **Descrição**: Ambiente de desenvolvimento integrado (IDE) para a linguagem de programação R.
 - **Uso**: Análise de dados, geração de relatórios e visualizações.
+- **Mais detalhes**: RStudio é uma IDE poderosa para R que facilita a análise de dados, a criação de gráficos e a geração de relatórios. Ele oferece uma interface amigável e ferramentas integradas para ajudar na codificação, depuração e visualização de dados.
 
-### RMarkdown
+### [RMarkdown](https://rmarkdown.rstudio.com/)
 - **Descrição**: Ferramenta para criar documentos dinâmicos com R.
 - **Uso**: Geração de relatórios para cada arquivo CSV analisado.
+- **Mais detalhes**: RMarkdown permite a criação de documentos dinâmicos que combinam código R, texto e visualizações. É ideal para gerar relatórios que podem ser facilmente atualizados com novos dados.
 
-### Appwrite
+### [Appwrite](https://appwrite.io/)
 - **Descrição**: Plataforma de Backend as a Service (BaaS) que oferece serviços como autenticação, banco de dados, armazenamento e muito mais.
 - **Uso**: Armazenamento de dados raw e dados processados, utilizando o storage e MariaDB.
+- **Mais detalhes**: Appwrite é uma plataforma BaaS que simplifica o desenvolvimento de aplicativos ao fornecer serviços essenciais como autenticação, banco de dados, armazenamento de arquivos e muito mais, tudo em uma única solução.
 
-### MariaDB
+### [MariaDB](https://mariadb.org/)
 - **Descrição**: Sistema de gerenciamento de banco de dados relacional.
 - **Uso**: Armazenamento de dados processados (dados working).
+- **Mais detalhes**: MariaDB é um sistema de gerenciamento de banco de dados relacional que é uma bifurcação do MySQL. Ele é conhecido por sua escalabilidade, desempenho e robustez, sendo amplamente utilizado para armazenar dados estruturados.
 
-### ElasticSearch
+### [ElasticSearch](https://www.elastic.co/elasticsearch/)
 - **Descrição**: Motor de busca e análise distribuído e de código aberto.
 - **Uso**: Indexação e busca avançada dos dados processados.
+- **Mais detalhes**: ElasticSearch é uma ferramenta poderosa para busca e análise de dados em tempo real. Ele permite a indexação rápida e eficiente de grandes volumes de dados, facilitando a busca e a análise avançada.
 
-### ClickHouse
+### [ClickHouse](https://clickhouse.com/)
 - **Descrição**: Sistema de gerenciamento de banco de dados orientado a colunas, de código aberto, para consultas analíticas em tempo real.
 - **Uso**: Armazenamento e análise de dados processados (dados trusted).
+- **Mais detalhes**: ClickHouse é um sistema de banco de dados orientado a colunas que é otimizado para consultas analíticas em tempo real. Ele é ideal para grandes volumes de dados e oferece desempenho excepcional para análises complexas.
 
-### Streamlit
+### [Streamlit](https://streamlit.io/)
 - **Descrição**: Framework de código aberto para a criação de aplicações web interativas em Python.
 - **Uso**: Construção de uma aplicação de análise de dados (DataApp).
+- **Mais detalhes**: Streamlit é um framework que facilita a criação de aplicações web interativas para análise de dados. Com ele, é possível transformar scripts Python em aplicativos web de forma rápida e eficiente.
 
-### Apache Spark
+### [Apache Spark](https://spark.apache.org/)
 - **Descrição**: Motor de análise unificada para processamento de dados em grande escala.
 - **Uso**: Processamento e predição de dados em produção.
+- **Mais detalhes**: Apache Spark é uma plataforma de processamento de dados em grande escala que oferece suporte para processamento em lote e em tempo real. Ele é amplamente utilizado para análise de big data e aprendizado de máquina.
 
-### Docker
+### [Docker](https://www.docker.com/)
 - **Descrição**: Plataforma para desenvolvimento, envio e execução de aplicações em contêineres.
 - **Uso**: Dockerização da aplicação Streamlit, ElasticSearch e ClickHouse.
+- **Mais detalhes**: Docker é uma plataforma que permite a criação, envio e execução de aplicações em contêineres. Ele facilita a portabilidade e a escalabilidade das aplicações, garantindo que elas funcionem de maneira consistente em diferentes ambientes.
 
-### Poetry
+### [Poetry](https://python-poetry.org/)
 - **Descrição**: Gestor de pacotes e dependências para projetos Python.
 - **Uso**: Gerenciamento de dependências da aplicação Streamlit.
+- **Mais detalhes**: Poetry é uma ferramenta para gerenciamento de dependências e pacotes em projetos Python. Ele simplifica a instalação e atualização de bibliotecas, garantindo que todas as dependências sejam resolvidas corretamente.
+
+### [Portainer](https://www.portainer.io/)
+- **Descrição**: Interface de gerenciamento para Docker.
+- **Uso**: Gerenciamento de contêineres Docker.
+- **Mais detalhes**: Portainer é uma interface de usuário para gerenciamento de contêineres Docker. Ele facilita a administração de ambientes Docker, permitindo a visualização, criação e gerenciamento de contêineres de forma intuitiva.
+- **Descrição**: Interface de gerenciamento para Docker.
+- **Uso**: Gerenciamento de contêineres Docker.
+<details>
+  <summary>Mais detalhes</summary>
+  Portainer é uma interface de usuário para gerenciamento de contêineres Docker. Ele facilita a administração de ambientes Docker, permitindo a visualização, criação e gerenciamento de contêineres de forma intuitiva.
+</details>
 
 ## Arquitetura de Processamento de Dados
 
