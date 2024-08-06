@@ -448,7 +448,7 @@ Nesta aula, exploramos técnicas avançadas de Análise Exploratória de Dados (
 
 ## Introdução
 
-O conjunto de dados de vinhos (`wine`) é amplamente utilizado para demonstrações de técnicas de análise de dados e machine learning. Ele contém informações químicas sobre diferentes tipos de vinhos e a qualidade atribuída a cada um. Neste tutorial, vamos realizar uma Análise Exploratória de Dados (EDA) completa utilizando a linguagem R.
+O conjunto de dados de vinhos (`[wine](https://archive.ics.uci.edu/dataset/186/wine+quality)`) é amplamente utilizado para demonstrações de técnicas de análise de dados e machine learning. Ele contém informações químicas sobre diferentes tipos de vinhos e a qualidade atribuída a cada um. Neste tutorial, vamos realizar uma Análise Exploratória de Dados (EDA) completa utilizando a linguagem R.
 
 ## Passo 1: Preparação do Ambiente
 
