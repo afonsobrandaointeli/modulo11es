@@ -19,7 +19,7 @@
 
 ## Kahoot
 
-<a href="https://kahoot.it/" target="blank_" class="btn btn-primary" style="width: 100%; margin: 10px;"><strong>📟Kahoot.it</strong></a>
+<a href="https://kahoot.it/" target="blank_" class="btn btn-primary" style="width: 100%; margin: 10px;"><strong>📟Kahoot.it!</strong></a>
 
 # Template de Arquitetura de Dados na Nuvem
 
