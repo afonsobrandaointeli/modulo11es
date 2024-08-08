@@ -256,3 +256,161 @@ docker run -d `
   -p 9000:9000 `
   yandex/clickhouse-server
 ```
+
+## Teste de Comparação
+
+### 1. Criação do `docker-compose.yml`
+
+Aqui está o arquivo `docker-compose.yml` atualizado para incluir a configuração de senha para o ClickHouse:
+
+```yaml
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: testdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: clickhouse
+    environment:
+      CLICKHOUSE_USER: user
+      CLICKHOUSE_PASSWORD: password
+      CLICKHOUSE_DB: testdb
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+
+volumes:
+  pgdata:
+  clickhouse_data:
+```
+
+### 2. Inicialização dos Contêineres
+
+Execute o comando abaixo para iniciar os contêineres:
+
+```sh
+docker-compose up -d
+```
+
+### 3. Criação das Tabelas e Inserção de Dados
+
+#### PostgreSQL
+
+Crie um arquivo chamado `postgres_setup.sql`:
+
+```sql
+-- Criação da tabela de teste
+CREATE TABLE teste (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100),
+    valor NUMERIC
+);
+
+-- Inserção de dados
+INSERT INTO teste (nome, valor)
+SELECT
+    'Nome ' || generate_series(1, 1000000),
+    random() * 100
+FROM generate_series(1, 1000000);
+```
+
+Para executar este script dentro do contêiner PostgreSQL, utilize o comando:
+
+```sh
+docker exec -i postgres psql -U user -d testdb -f /path/to/postgres_setup.sql
+```
+
+#### ClickHouse
+
+Crie um arquivo chamado `clickhouse_setup.sql`:
+
+```sql
+-- Criação da tabela de teste
+CREATE TABLE teste (
+    id UInt32,
+    nome String,
+    valor Float32
+) ENGINE = MergeTree()
+ORDER BY id;
+
+-- Inserção de dados
+INSERT INTO teste SELECT
+    number AS id,
+    concat('Nome ', toString(number)) AS nome,
+    rand() % 100 AS valor
+FROM numbers(1000000);
+```
+
+Para executar este script dentro do contêiner ClickHouse, utilize o comando:
+
+```sh
+docker exec -i clickhouse clickhouse-client --user user --password password --query="$(cat /path/to/clickhouse_setup.sql)"
+```
+
+### 4. Execução das Consultas de Leitura
+
+#### PostgreSQL
+
+```sql
+\timing
+SELECT * FROM teste WHERE valor > 50;
+```
+
+Para executar esta consulta dentro do contêiner PostgreSQL:
+
+```sh
+docker exec -it postgres psql -U user -d testdb -c "\timing" -c "SELECT * FROM teste WHERE valor > 50;"
+```
+
+#### ClickHouse
+
+```sql
+SELECT * FROM teste WHERE valor > 50;
+```
+
+Para executar esta consulta dentro do contêiner ClickHouse:
+
+```sh
+docker exec -it clickhouse clickhouse-client --user user --password password --query="SELECT * FROM teste WHERE valor > 50;"
+```
+
+### 5. Limpeza
+
+Para remover as tabelas de teste após a execução dos testes:
+
+#### PostgreSQL
+
+```sql
+DROP TABLE teste;
+```
+
+Para executar este comando dentro do contêiner PostgreSQL:
+
+```sh
+docker exec -it postgres psql -U user -d testdb -c "DROP TABLE teste;"
+```
+
+#### ClickHouse
+
+```sql
+DROP TABLE teste;
+```
+
+Para executar este comando dentro do contêiner ClickHouse:
+
+```sh
+docker exec -it clickhouse clickhouse-client --user user --password password --query="DROP TABLE teste;"
+```

@@ -222,6 +222,13 @@
             <li class="second-level"><a href="#vamos-explorar-o-supabase">Vamos explorar o Supabase 🧠</a></li>
                 
         <li class="first-level "><a href="#pratica-clickhouse-como-datawarehouse">Prática (ClickHouse como DataWareHouse)</a></li>
+            <li class="second-level"><a href="#teste-de-comparacao">Teste de Comparação</a></li>
+                
+                <li class="third-level"><a href="#1-criacao-do-docker-composeyml">1. Criação do docker-compose.yml</a></li>
+                <li class="third-level"><a href="#2-inicializacao-dos-conteineres">2. Inicialização dos Contêineres</a></li>
+                <li class="third-level"><a href="#3-criacao-das-tabelas-e-insercao-de-dados">3. Criação das Tabelas e Inserção de Dados</a></li>
+                <li class="third-level"><a href="#4-execucao-das-consultas-de-leitura">4. Execução das Consultas de Leitura</a></li>
+                <li class="third-level"><a href="#5-limpeza">5. Limpeza</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -514,6 +521,127 @@
 <span class="w">  </span>-p<span class="w"> </span><span class="m">8123</span>:8123<span class="w"> </span><span class="sb">`</span>
 <span class="w">  </span>-p<span class="w"> </span><span class="m">9000</span>:9000<span class="w"> </span><span class="sb">`</span>
 <span class="w">  </span>yandex/clickhouse-server
+</code></pre></div>
+
+<h2 id="teste-de-comparacao">Teste de Comparação<a class="headerlink" href="#teste-de-comparacao" title="Permanent link">&para;</a></h2>
+<h3 id="1-criacao-do-docker-composeyml">1. Criação do <code>docker-compose.yml</code><a class="headerlink" href="#1-criacao-do-docker-composeyml" title="Permanent link">&para;</a></h3>
+<p>Aqui está o arquivo <code>docker-compose.yml</code> atualizado para incluir a configuração de senha para o ClickHouse:</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.8&#39;</span>
+
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">postgres</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:latest</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">POSTGRES_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user</span>
+<span class="w">      </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+<span class="w">      </span><span class="nt">POSTGRES_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">testdb</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;5432:5432&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pgdata:/var/lib/postgresql/data</span>
+
+<span class="w">  </span><span class="nt">clickhouse</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clickhouse/clickhouse-server:latest</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clickhouse</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">CLICKHOUSE_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user</span>
+<span class="w">      </span><span class="nt">CLICKHOUSE_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+<span class="w">      </span><span class="nt">CLICKHOUSE_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">testdb</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8123:8123&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;9000:9000&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clickhouse_data:/var/lib/clickhouse</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pgdata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">clickhouse_data</span><span class="p">:</span>
+</code></pre></div>
+
+<h3 id="2-inicializacao-dos-conteineres">2. Inicialização dos Contêineres<a class="headerlink" href="#2-inicializacao-dos-conteineres" title="Permanent link">&para;</a></h3>
+<p>Execute o comando abaixo para iniciar os contêineres:</p>
+<div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+
+<h3 id="3-criacao-das-tabelas-e-insercao-de-dados">3. Criação das Tabelas e Inserção de Dados<a class="headerlink" href="#3-criacao-das-tabelas-e-insercao-de-dados" title="Permanent link">&para;</a></h3>
+<h4 id="postgresql">PostgreSQL<a class="headerlink" href="#postgresql" title="Permanent link">&para;</a></h4>
+<p>Crie um arquivo chamado <code>postgres_setup.sql</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Criação da tabela de teste</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">teste</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">nome</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
+<span class="w">    </span><span class="n">valor</span><span class="w"> </span><span class="nb">NUMERIC</span>
+<span class="p">);</span>
+
+<span class="c1">-- Inserção de dados</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">teste</span><span class="w"> </span><span class="p">(</span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="n">valor</span><span class="p">)</span>
+<span class="k">SELECT</span>
+<span class="w">    </span><span class="s1">&#39;Nome &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1000000</span><span class="p">),</span>
+<span class="w">    </span><span class="n">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1000000</span><span class="p">);</span>
+</code></pre></div>
+
+<p>Para executar este script dentro do contêiner PostgreSQL, utilize o comando:</p>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>postgres<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>user<span class="w"> </span>-d<span class="w"> </span>testdb<span class="w"> </span>-f<span class="w"> </span>/path/to/postgres_setup.sql
+</code></pre></div>
+
+<h4 id="clickhouse">ClickHouse<a class="headerlink" href="#clickhouse" title="Permanent link">&para;</a></h4>
+<p>Crie um arquivo chamado <code>clickhouse_setup.sql</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Criação da tabela de teste</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">teste</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="n">UInt32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">nome</span><span class="w"> </span><span class="n">String</span><span class="p">,</span>
+<span class="w">    </span><span class="n">valor</span><span class="w"> </span><span class="n">Float32</span>
+<span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MergeTree</span><span class="p">()</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+
+<span class="c1">-- Inserção de dados</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">teste</span><span class="w"> </span><span class="k">SELECT</span>
+<span class="w">    </span><span class="nb">number</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">id</span><span class="p">,</span>
+<span class="w">    </span><span class="n">concat</span><span class="p">(</span><span class="s1">&#39;Nome &#39;</span><span class="p">,</span><span class="w"> </span><span class="n">toString</span><span class="p">(</span><span class="nb">number</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">valor</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">numbers</span><span class="p">(</span><span class="mi">1000000</span><span class="p">);</span>
+</code></pre></div>
+
+<p>Para executar este script dentro do contêiner ClickHouse, utilize o comando:</p>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>clickhouse<span class="w"> </span>clickhouse-client<span class="w"> </span>--user<span class="w"> </span>user<span class="w"> </span>--password<span class="w"> </span>password<span class="w"> </span>--query<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span>/path/to/clickhouse_setup.sql<span class="k">)</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+<h3 id="4-execucao-das-consultas-de-leitura">4. Execução das Consultas de Leitura<a class="headerlink" href="#4-execucao-das-consultas-de-leitura" title="Permanent link">&para;</a></h3>
+<h4 id="postgresql_1">PostgreSQL<a class="headerlink" href="#postgresql_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="err">\</span><span class="n">timing</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">teste</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+</code></pre></div>
+
+<p>Para executar esta consulta dentro do contêiner PostgreSQL:</p>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>postgres<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>user<span class="w"> </span>-d<span class="w"> </span>testdb<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;\timing&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;SELECT * FROM teste WHERE valor &gt; 50;&quot;</span>
+</code></pre></div>
+
+<h4 id="clickhouse_1">ClickHouse<a class="headerlink" href="#clickhouse_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">teste</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+</code></pre></div>
+
+<p>Para executar esta consulta dentro do contêiner ClickHouse:</p>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>clickhouse<span class="w"> </span>clickhouse-client<span class="w"> </span>--user<span class="w"> </span>user<span class="w"> </span>--password<span class="w"> </span>password<span class="w"> </span>--query<span class="o">=</span><span class="s2">&quot;SELECT * FROM teste WHERE valor &gt; 50;&quot;</span>
+</code></pre></div>
+
+<h3 id="5-limpeza">5. Limpeza<a class="headerlink" href="#5-limpeza" title="Permanent link">&para;</a></h3>
+<p>Para remover as tabelas de teste após a execução dos testes:</p>
+<h4 id="postgresql_2">PostgreSQL<a class="headerlink" href="#postgresql_2" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">teste</span><span class="p">;</span>
+</code></pre></div>
+
+<p>Para executar este comando dentro do contêiner PostgreSQL:</p>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>postgres<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>user<span class="w"> </span>-d<span class="w"> </span>testdb<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;DROP TABLE teste;&quot;</span>
+</code></pre></div>
+
+<h4 id="clickhouse_2">ClickHouse<a class="headerlink" href="#clickhouse_2" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">teste</span><span class="p">;</span>
+</code></pre></div>
+
+<p>Para executar este comando dentro do contêiner ClickHouse:</p>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>clickhouse<span class="w"> </span>clickhouse-client<span class="w"> </span>--user<span class="w"> </span>user<span class="w"> </span>--password<span class="w"> </span>password<span class="w"> </span>--query<span class="o">=</span><span class="s2">&quot;DROP TABLE teste;&quot;</span>
 </code></pre></div></div>
         
         
