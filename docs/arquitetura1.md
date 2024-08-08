@@ -414,3 +414,100 @@ Para executar este comando dentro do contêiner ClickHouse:
 ```sh
 docker exec -it clickhouse clickhouse-client --user user --password password --query="DROP TABLE teste;"
 ```
+
+#### Arquitetura e Design
+
+1. **Armazenamento em Colunas**:
+   - **ClickHouse**: Utiliza uma arquitetura de armazenamento em colunas, o que significa que os dados são armazenados por coluna em vez de por linha. Isso permite uma leitura e compressão de dados muito mais eficiente, especialmente para consultas analíticas que acessam um subconjunto de colunas.
+   - **PostgreSQL**: Utiliza uma arquitetura de armazenamento em linhas, o que é mais eficiente para operações transacionais (OLTP) onde a maioria das consultas acessa todas as colunas de uma linha específica.
+
+2. **Compressão de Dados**:
+   - **ClickHouse**: A compressão de dados em colunas é mais eficiente porque dados semelhantes são armazenados juntos, permitindo algoritmos de compressão mais eficazes.
+   - **PostgreSQL**: Embora suporte compressão, a eficiência é menor devido ao armazenamento em linhas.
+
+3. **Processamento em Modo Vetorial**:
+   - **ClickHouse**: Utiliza processamento em modo vetorial, onde as operações são realizadas em blocos de dados ao invés de tuplas individuais, resultando em melhor utilização da CPU e maior throughput.
+   - **PostgreSQL**: Processa dados em tuplas individuais, o que é menos eficiente para grandes volumes de dados.
+
+#### Performance em Consultas
+
+1. **Consultas Analíticas**:
+   - **ClickHouse**: Projetado especificamente para consultas analíticas (OLAP), oferecendo desempenho superior em agregações, filtragens e cálculos em grandes conjuntos de dados.
+   - **PostgreSQL**: Embora possa executar consultas analíticas, não é otimizado para tal e pode ser significativamente mais lento em comparação com ClickHouse.
+
+2. **Indexação**:
+   - **ClickHouse**: Utiliza índices primários baseados em ordenação e índices de dados em colunas, otimizados para leitura rápida.
+   - **PostgreSQL**: Utiliza índices B-tree e outros tipos de índices que são mais versáteis, mas podem ser menos eficientes para consultas analíticas em grandes volumes de dados.
+
+#### Trade-offs
+
+1. **Transações e Consistência**:
+   - **ClickHouse**: Não oferece suporte completo a transações ACID (Atomicidade, Consistência, Isolamento e Durabilidade). É otimizado para leituras rápidas e escritas em massa, mas pode não garantir a consistência em todas as operações.
+   - **PostgreSQL**: Oferece suporte completo a transações ACID, sendo ideal para aplicações OLTP onde a consistência e a integridade dos dados são cruciais.
+
+2. **Flexibilidade e Funcionalidades**:
+   - **ClickHouse**: Focado em consultas analíticas, pode não oferecer todas as funcionalidades avançadas de um banco de dados relacional completo, como suporte a joins complexos, triggers e stored procedures.
+   - **PostgreSQL**: Extremamente versátil, oferece uma ampla gama de funcionalidades, incluindo suporte a joins complexos, triggers, stored procedures, e extensões como PostGIS para dados geoespaciais.
+
+3. **Escritas e Atualizações**:
+   - **ClickHouse**: Otimizado para leituras rápidas, mas as operações de escrita e atualização podem ser menos eficientes. Não é ideal para cargas de trabalho que envolvem muitas atualizações frequentes de dados.
+   - **PostgreSQL**: Melhor equilibrado para operações de leitura e escrita, sendo adequado tanto para OLTP quanto para OLAP, embora não seja tão rápido quanto ClickHouse para grandes consultas analíticas.
+
+4. **Ecossistema e Suporte**:
+   - **ClickHouse**: Comunidade em crescimento, mas ainda mais recente em comparação com PostgreSQL. Pode haver menos ferramentas e bibliotecas disponíveis.
+   - **PostgreSQL**: Ecossistema maduro com uma vasta gama de ferramentas, bibliotecas e suporte comunitário e comercial.
+
+
+### Introdução ao Parquet
+
+![cloudinary](https://res.cloudinary.com/dyhjjms8y/image/upload/v1723124171/Captura_de_tela_2024-08-08_103536_ekp0vn.png)
+
+**Parquet** é um formato de armazenamento de dados em colunas desenvolvido para o ecossistema Hadoop. É projetado para ser altamente eficiente tanto em termos de espaço quanto de desempenho, especialmente para grandes volumes de dados. Ele é amplamente utilizado em ambientes de Big Data devido à sua capacidade de suportar leitura e escrita eficientes.
+
+### Introdução ao CSV
+
+**CSV (Comma-Separated Values)** é um formato de arquivo simples e amplamente utilizado para armazenar dados tabulares em texto plano. Cada linha do arquivo representa um registro e cada campo é separado por uma vírgula (ou outro delimitador, como ponto e vírgula).
+
+### Comparação: Parquet vs. CSV
+
+#### Estrutura de Armazenamento
+
+- **Parquet**:
+  - **Armazenamento em Colunas**: Os dados são armazenados por coluna, o que permite uma leitura e compressão mais eficiente, especialmente para consultas que acessam um subconjunto de colunas.
+  - **Metadados**: Inclui metadados ricos que descrevem o esquema dos dados, tipos de dados e outras informações úteis.
+
+- **CSV**:
+  - **Armazenamento em Linhas**: Os dados são armazenados por linha, o que é simples e direto, mas menos eficiente para grandes volumes de dados e consultas que acessam apenas algumas colunas.
+  - **Metadados**: Não possui metadados embutidos. O esquema dos dados deve ser inferido ou fornecido separadamente.
+
+#### Desempenho
+
+- **Parquet**:
+  - **Leitura e Escrita**: Muito eficiente para leitura de grandes volumes de dados, especialmente quando apenas algumas colunas são necessárias. A escrita pode ser mais lenta devido à compressão e ao armazenamento em colunas.
+  - **Compressão**: Suporta compressão eficiente de dados, reduzindo significativamente o espaço de armazenamento necessário.
+  - **Consultas Analíticas**: Excelente desempenho para consultas analíticas devido ao armazenamento em colunas.
+
+- **CSV**:
+  - **Leitura e Escrita**: Leitura e escrita simples e rápidas, mas pode ser ineficiente para grandes volumes de dados.
+  - **Compressão**: Não suporta compressão nativamente. Pode ser comprimido usando ferramentas externas (por exemplo, gzip), mas isso não é tão eficiente quanto a compressão nativa do Parquet.
+  - **Consultas Analíticas**: Desempenho inferior para consultas analíticas em grandes volumes de dados devido ao armazenamento em linhas.
+
+#### Flexibilidade e Usabilidade
+
+- **Parquet**:
+  - **Complexidade**: Mais complexo de usar e configurar devido à necessidade de bibliotecas específicas para leitura e escrita.
+  - **Compatibilidade**: Amplamente suportado em ferramentas de Big Data, como Apache Spark, Apache Hive, e Apache Drill.
+
+- **CSV**:
+  - **Simplicidade**: Muito simples de usar e entender. Pode ser aberto e editado com qualquer editor de texto ou planilha.
+  - **Compatibilidade**: Suportado por praticamente todas as ferramentas de software, desde simples editores de texto até sistemas de banco de dados e ferramentas de análise de dados.
+
+#### Casos de Uso
+
+- **Parquet**:
+  - Ideal para grandes volumes de dados e cargas de trabalho analíticas.
+  - Usado em ambientes de Big Data onde a eficiência de armazenamento e desempenho de leitura são críticos.
+
+- **CSV**:
+  - Adequado para pequenos a médios volumes de dados.
+  - Ideal para intercâmbio de dados entre sistemas e para uso em ferramentas que não suportam formatos de dados mais complexos.
