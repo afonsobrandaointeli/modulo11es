@@ -1,4 +1,6 @@
-# Autoestudos
+# Arquitetura e Governança de Dados na Nuvem 1
+
+## Autoestudos
 
 | 📚 **Nome**                                     | 🔗 **Link**                                                                 |
 |-------------------------------------------------------|-----------------------------------------------------------------------------|
@@ -6,7 +8,7 @@
 | 📝 Arquiteto de Dados - Por Onde Começar em 5 Passos | [Ler](https://blog.dsacademy.com.br/arquiteto-de-dados-por-onde-comecar-em-5-passos/) |
 | 🏢 Estruturas Organizacionais                        | [Acessar](https://integrada.minhabiblioteca.com.br/reader/books/9786587019536/pageid/99) |
 
-# Agenda da Aula
+## Agenda da Aula
 
 |Atividade                                        |Min    |
 |-------------------------------------------------|-------|
@@ -15,7 +17,7 @@
 |Vamos subir o Supabase e Analisar uma Arquitetura|60     |
 |**Total**                                        |**120**|
 
-# Kahoot
+## Kahoot
 
 <a href="https://kahoot.it/" target="blank_" class="btn btn-primary" style="width: 100%; margin: 10px;"><strong>📟Kahoot.it</strong></a>
 
