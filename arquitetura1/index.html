@@ -222,6 +222,12 @@
             <li class="second-level"><a href="#vamos-explorar-o-supabase">Vamos explorar o Supabase 🧠</a></li>
                 
         <li class="first-level "><a href="#pratica-clickhouse-como-datawarehouse">Prática (ClickHouse como DataWareHouse)</a></li>
+            <li class="second-level"><a href="#teste-de-comparacao">Teste de Comparação</a></li>
+                
+                <li class="third-level"><a href="#postgresql">PostgreSQL</a></li>
+                <li class="third-level"><a href="#clickhouse">ClickHouse</a></li>
+                <li class="third-level"><a href="#comparacao-de-tempo">Comparação de Tempo</a></li>
+                <li class="third-level"><a href="#observacoes">Observações</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -514,7 +520,98 @@
 <span class="w">  </span>-p<span class="w"> </span><span class="m">8123</span>:8123<span class="w"> </span><span class="sb">`</span>
 <span class="w">  </span>-p<span class="w"> </span><span class="m">9000</span>:9000<span class="w"> </span><span class="sb">`</span>
 <span class="w">  </span>yandex/clickhouse-server
-</code></pre></div></div>
+</code></pre></div>
+
+<h2 id="teste-de-comparacao">Teste de Comparação<a class="headerlink" href="#teste-de-comparacao" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Preparação do ambiente</strong>: Certifique-se de que ambas as bases de dados estejam instaladas e configuradas corretamente.</p>
+</li>
+<li>
+<p><strong>Criação das tabelas de teste</strong>: Crie tabelas idênticas em ambas as bases de dados.</p>
+</li>
+<li>
+<p><strong>Inserção de dados</strong>: Insira um volume significativo de dados em ambas as tabelas.</p>
+</li>
+<li>
+<p><strong>Execução das consultas de leitura</strong>: Execute consultas de leitura e meça o tempo de execução.</p>
+</li>
+<li>
+<p><strong>Limpeza</strong>: Remova as tabelas de teste após a execução dos testes.</p>
+</li>
+</ol>
+<p>Abaixo está um exemplo de script SQL para cada etapa. Este script deve ser adaptado conforme necessário para o seu ambiente específico.</p>
+<h3 id="postgresql">PostgreSQL<a class="headerlink" href="#postgresql" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Conecte-se ao PostgreSQL</span>
+<span class="err">\</span><span class="k">c</span><span class="w"> </span><span class="n">sua_base_de_dados</span><span class="p">;</span>
+
+<span class="c1">-- 1. Criação da tabela de teste</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">teste</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">nome</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
+<span class="w">    </span><span class="n">valor</span><span class="w"> </span><span class="nb">NUMERIC</span>
+<span class="p">);</span>
+
+<span class="c1">-- 2. Inserção de dados</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">teste</span><span class="w"> </span><span class="p">(</span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="n">valor</span><span class="p">)</span>
+<span class="k">SELECT</span>
+<span class="w">    </span><span class="s1">&#39;Nome &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1000000</span><span class="p">),</span>
+<span class="w">    </span><span class="n">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1000000</span><span class="p">);</span>
+
+<span class="c1">-- 3. Execução de consultas de leitura</span>
+<span class="c1">-- Medir o tempo de execução de uma consulta simples</span>
+<span class="err">\</span><span class="n">timing</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">teste</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+
+<span class="c1">-- 4. Limpeza</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">teste</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="clickhouse">ClickHouse<a class="headerlink" href="#clickhouse" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Conecte-se ao ClickHouse</span>
+<span class="c1">-- Utilize o cliente CLI do ClickHouse ou um cliente SQL compatível</span>
+
+<span class="c1">-- 1. Criação da tabela de teste</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">teste</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="n">UInt32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">nome</span><span class="w"> </span><span class="n">String</span><span class="p">,</span>
+<span class="w">    </span><span class="n">valor</span><span class="w"> </span><span class="n">Float32</span>
+<span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MergeTree</span><span class="p">()</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+
+<span class="c1">-- 2. Inserção de dados</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">teste</span><span class="w"> </span><span class="k">SELECT</span>
+<span class="w">    </span><span class="nb">number</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">id</span><span class="p">,</span>
+<span class="w">    </span><span class="n">concat</span><span class="p">(</span><span class="s1">&#39;Nome &#39;</span><span class="p">,</span><span class="w"> </span><span class="n">toString</span><span class="p">(</span><span class="nb">number</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">valor</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">numbers</span><span class="p">(</span><span class="mi">1000000</span><span class="p">);</span>
+
+<span class="c1">-- 3. Execução de consultas de leitura</span>
+<span class="c1">-- Medir o tempo de execução de uma consulta simples</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">teste</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+
+<span class="c1">-- 4. Limpeza</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">teste</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="comparacao-de-tempo">Comparação de Tempo<a class="headerlink" href="#comparacao-de-tempo" title="Permanent link">&para;</a></h3>
+<p>Para medir o tempo de execução das consultas, você pode utilizar as funcionalidades internas dos bancos de dados ou ferramentas de monitoramento externas.</p>
+<ol>
+<li>
+<p><strong>PostgreSQL</strong>: Utilize o comando <code>\timing</code> no cliente psql para medir o tempo de execução das consultas.</p>
+</li>
+<li>
+<p><strong>ClickHouse</strong>: O tempo de execução é normalmente mostrado automaticamente após a execução da consulta no cliente CLI do ClickHouse.</p>
+</li>
+</ol>
+<h3 id="observacoes">Observações<a class="headerlink" href="#observacoes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Certifique-se de que o hardware e a configuração do servidor sejam os mesmos para ambos os bancos de dados para uma comparação justa.</li>
+<li>Execute múltiplas iterações de cada teste e calcule a média dos tempos de execução para obter resultados mais precisos.</li>
+<li>Considere o uso de ferramentas de benchmarking específicas para bancos de dados, como o <code>pgbench</code> para PostgreSQL e o <code>clickhouse-benchmark</code> para ClickHouse, para testes mais detalhados.</li>
+</ul>
+<p>Esses scripts fornecem uma base para começar, mas podem ser ajustados conforme necessário para se adequarem ao seu ambiente e requisitos específicos.</p></div>
         
         
     </div>
