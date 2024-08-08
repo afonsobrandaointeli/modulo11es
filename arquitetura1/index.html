@@ -229,6 +229,9 @@
                 <li class="third-level"><a href="#3-criacao-das-tabelas-e-insercao-de-dados">3. Criação das Tabelas e Inserção de Dados</a></li>
                 <li class="third-level"><a href="#4-execucao-das-consultas-de-leitura">4. Execução das Consultas de Leitura</a></li>
                 <li class="third-level"><a href="#5-limpeza">5. Limpeza</a></li>
+                <li class="third-level"><a href="#introducao-ao-parquet">Introdução ao Parquet</a></li>
+                <li class="third-level"><a href="#introducao-ao-csv">Introdução ao CSV</a></li>
+                <li class="third-level"><a href="#comparacao-parquet-vs-csv">Comparação: Parquet vs. CSV</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -642,7 +645,128 @@
 
 <p>Para executar este comando dentro do contêiner ClickHouse:</p>
 <div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>clickhouse<span class="w"> </span>clickhouse-client<span class="w"> </span>--user<span class="w"> </span>user<span class="w"> </span>--password<span class="w"> </span>password<span class="w"> </span>--query<span class="o">=</span><span class="s2">&quot;DROP TABLE teste;&quot;</span>
-</code></pre></div></div>
+</code></pre></div>
+
+<h4 id="arquitetura-e-design">Arquitetura e Design<a class="headerlink" href="#arquitetura-e-design" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Armazenamento em Colunas</strong>:</li>
+<li><strong>ClickHouse</strong>: Utiliza uma arquitetura de armazenamento em colunas, o que significa que os dados são armazenados por coluna em vez de por linha. Isso permite uma leitura e compressão de dados muito mais eficiente, especialmente para consultas analíticas que acessam um subconjunto de colunas.</li>
+<li>
+<p><strong>PostgreSQL</strong>: Utiliza uma arquitetura de armazenamento em linhas, o que é mais eficiente para operações transacionais (OLTP) onde a maioria das consultas acessa todas as colunas de uma linha específica.</p>
+</li>
+<li>
+<p><strong>Compressão de Dados</strong>:</p>
+</li>
+<li><strong>ClickHouse</strong>: A compressão de dados em colunas é mais eficiente porque dados semelhantes são armazenados juntos, permitindo algoritmos de compressão mais eficazes.</li>
+<li>
+<p><strong>PostgreSQL</strong>: Embora suporte compressão, a eficiência é menor devido ao armazenamento em linhas.</p>
+</li>
+<li>
+<p><strong>Processamento em Modo Vetorial</strong>:</p>
+</li>
+<li><strong>ClickHouse</strong>: Utiliza processamento em modo vetorial, onde as operações são realizadas em blocos de dados ao invés de tuplas individuais, resultando em melhor utilização da CPU e maior throughput.</li>
+<li><strong>PostgreSQL</strong>: Processa dados em tuplas individuais, o que é menos eficiente para grandes volumes de dados.</li>
+</ol>
+<h4 id="performance-em-consultas">Performance em Consultas<a class="headerlink" href="#performance-em-consultas" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Consultas Analíticas</strong>:</li>
+<li><strong>ClickHouse</strong>: Projetado especificamente para consultas analíticas (OLAP), oferecendo desempenho superior em agregações, filtragens e cálculos em grandes conjuntos de dados.</li>
+<li>
+<p><strong>PostgreSQL</strong>: Embora possa executar consultas analíticas, não é otimizado para tal e pode ser significativamente mais lento em comparação com ClickHouse.</p>
+</li>
+<li>
+<p><strong>Indexação</strong>:</p>
+</li>
+<li><strong>ClickHouse</strong>: Utiliza índices primários baseados em ordenação e índices de dados em colunas, otimizados para leitura rápida.</li>
+<li><strong>PostgreSQL</strong>: Utiliza índices B-tree e outros tipos de índices que são mais versáteis, mas podem ser menos eficientes para consultas analíticas em grandes volumes de dados.</li>
+</ol>
+<h4 id="trade-offs">Trade-offs<a class="headerlink" href="#trade-offs" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Transações e Consistência</strong>:</li>
+<li><strong>ClickHouse</strong>: Não oferece suporte completo a transações ACID (Atomicidade, Consistência, Isolamento e Durabilidade). É otimizado para leituras rápidas e escritas em massa, mas pode não garantir a consistência em todas as operações.</li>
+<li>
+<p><strong>PostgreSQL</strong>: Oferece suporte completo a transações ACID, sendo ideal para aplicações OLTP onde a consistência e a integridade dos dados são cruciais.</p>
+</li>
+<li>
+<p><strong>Flexibilidade e Funcionalidades</strong>:</p>
+</li>
+<li><strong>ClickHouse</strong>: Focado em consultas analíticas, pode não oferecer todas as funcionalidades avançadas de um banco de dados relacional completo, como suporte a joins complexos, triggers e stored procedures.</li>
+<li>
+<p><strong>PostgreSQL</strong>: Extremamente versátil, oferece uma ampla gama de funcionalidades, incluindo suporte a joins complexos, triggers, stored procedures, e extensões como PostGIS para dados geoespaciais.</p>
+</li>
+<li>
+<p><strong>Escritas e Atualizações</strong>:</p>
+</li>
+<li><strong>ClickHouse</strong>: Otimizado para leituras rápidas, mas as operações de escrita e atualização podem ser menos eficientes. Não é ideal para cargas de trabalho que envolvem muitas atualizações frequentes de dados.</li>
+<li>
+<p><strong>PostgreSQL</strong>: Melhor equilibrado para operações de leitura e escrita, sendo adequado tanto para OLTP quanto para OLAP, embora não seja tão rápido quanto ClickHouse para grandes consultas analíticas.</p>
+</li>
+<li>
+<p><strong>Ecossistema e Suporte</strong>:</p>
+</li>
+<li><strong>ClickHouse</strong>: Comunidade em crescimento, mas ainda mais recente em comparação com PostgreSQL. Pode haver menos ferramentas e bibliotecas disponíveis.</li>
+<li><strong>PostgreSQL</strong>: Ecossistema maduro com uma vasta gama de ferramentas, bibliotecas e suporte comunitário e comercial.</li>
+</ol>
+<h3 id="introducao-ao-parquet">Introdução ao Parquet<a class="headerlink" href="#introducao-ao-parquet" title="Permanent link">&para;</a></h3>
+<p><img alt="cloudinary" src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1723124171/Captura_de_tela_2024-08-08_103536_ekp0vn.png" /></p>
+<p><strong>Parquet</strong> é um formato de armazenamento de dados em colunas desenvolvido para o ecossistema Hadoop. É projetado para ser altamente eficiente tanto em termos de espaço quanto de desempenho, especialmente para grandes volumes de dados. Ele é amplamente utilizado em ambientes de Big Data devido à sua capacidade de suportar leitura e escrita eficientes.</p>
+<h3 id="introducao-ao-csv">Introdução ao CSV<a class="headerlink" href="#introducao-ao-csv" title="Permanent link">&para;</a></h3>
+<p><strong>CSV (Comma-Separated Values)</strong> é um formato de arquivo simples e amplamente utilizado para armazenar dados tabulares em texto plano. Cada linha do arquivo representa um registro e cada campo é separado por uma vírgula (ou outro delimitador, como ponto e vírgula).</p>
+<h3 id="comparacao-parquet-vs-csv">Comparação: Parquet vs. CSV<a class="headerlink" href="#comparacao-parquet-vs-csv" title="Permanent link">&para;</a></h3>
+<h4 id="estrutura-de-armazenamento">Estrutura de Armazenamento<a class="headerlink" href="#estrutura-de-armazenamento" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Parquet</strong>:</li>
+<li><strong>Armazenamento em Colunas</strong>: Os dados são armazenados por coluna, o que permite uma leitura e compressão mais eficiente, especialmente para consultas que acessam um subconjunto de colunas.</li>
+<li>
+<p><strong>Metadados</strong>: Inclui metadados ricos que descrevem o esquema dos dados, tipos de dados e outras informações úteis.</p>
+</li>
+<li>
+<p><strong>CSV</strong>:</p>
+</li>
+<li><strong>Armazenamento em Linhas</strong>: Os dados são armazenados por linha, o que é simples e direto, mas menos eficiente para grandes volumes de dados e consultas que acessam apenas algumas colunas.</li>
+<li><strong>Metadados</strong>: Não possui metadados embutidos. O esquema dos dados deve ser inferido ou fornecido separadamente.</li>
+</ul>
+<h4 id="desempenho">Desempenho<a class="headerlink" href="#desempenho" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Parquet</strong>:</li>
+<li><strong>Leitura e Escrita</strong>: Muito eficiente para leitura de grandes volumes de dados, especialmente quando apenas algumas colunas são necessárias. A escrita pode ser mais lenta devido à compressão e ao armazenamento em colunas.</li>
+<li><strong>Compressão</strong>: Suporta compressão eficiente de dados, reduzindo significativamente o espaço de armazenamento necessário.</li>
+<li>
+<p><strong>Consultas Analíticas</strong>: Excelente desempenho para consultas analíticas devido ao armazenamento em colunas.</p>
+</li>
+<li>
+<p><strong>CSV</strong>:</p>
+</li>
+<li><strong>Leitura e Escrita</strong>: Leitura e escrita simples e rápidas, mas pode ser ineficiente para grandes volumes de dados.</li>
+<li><strong>Compressão</strong>: Não suporta compressão nativamente. Pode ser comprimido usando ferramentas externas (por exemplo, gzip), mas isso não é tão eficiente quanto a compressão nativa do Parquet.</li>
+<li><strong>Consultas Analíticas</strong>: Desempenho inferior para consultas analíticas em grandes volumes de dados devido ao armazenamento em linhas.</li>
+</ul>
+<h4 id="flexibilidade-e-usabilidade">Flexibilidade e Usabilidade<a class="headerlink" href="#flexibilidade-e-usabilidade" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Parquet</strong>:</li>
+<li><strong>Complexidade</strong>: Mais complexo de usar e configurar devido à necessidade de bibliotecas específicas para leitura e escrita.</li>
+<li>
+<p><strong>Compatibilidade</strong>: Amplamente suportado em ferramentas de Big Data, como Apache Spark, Apache Hive, e Apache Drill.</p>
+</li>
+<li>
+<p><strong>CSV</strong>:</p>
+</li>
+<li><strong>Simplicidade</strong>: Muito simples de usar e entender. Pode ser aberto e editado com qualquer editor de texto ou planilha.</li>
+<li><strong>Compatibilidade</strong>: Suportado por praticamente todas as ferramentas de software, desde simples editores de texto até sistemas de banco de dados e ferramentas de análise de dados.</li>
+</ul>
+<h4 id="casos-de-uso">Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Parquet</strong>:</li>
+<li>Ideal para grandes volumes de dados e cargas de trabalho analíticas.</li>
+<li>
+<p>Usado em ambientes de Big Data onde a eficiência de armazenamento e desempenho de leitura são críticos.</p>
+</li>
+<li>
+<p><strong>CSV</strong>:</p>
+</li>
+<li>Adequado para pequenos a médios volumes de dados.</li>
+<li>Ideal para intercâmbio de dados entre sistemas e para uso em ferramentas que não suportam formatos de dados mais complexos.</li>
+</ul></div>
         
         
     </div>
