@@ -198,6 +198,24 @@
         <li class="first-level active"><a href="#ingestao-e-processamento-de-dados">Ingestão e Processamento de Dados</a></li>
         <li class="first-level "><a href="#agenda">Agenda</a></li>
         <li class="first-level "><a href="#demonstracao-pratica-de-um-pacote-python">Demonstração Prática de Um Pacote Python</a></li>
+            <li class="second-level"><a href="#pre-requisitos">Pré-requisitos</a></li>
+                
+            <li class="second-level"><a href="#estrutura-da-aula">Estrutura da Aula</a></li>
+                
+                <li class="third-level"><a href="#criando-o-pacote">Criando o Pacote</a></li>
+                <li class="third-level"><a href="#pyprojecttoml">Pyproject.toml</a></li>
+                <li class="third-level"><a href="#configurar-o-docker-compose-com-minio-e-clickhouse">Configurar o Docker Compose com MinIO e ClickHouse</a></li>
+            <li class="second-level"><a href="#vamos-testar-o-miniio">Vamos testar o Mini.IO</a></li>
+                
+            <li class="second-level"><a href="#sql-para-cracao-da-tabela">SQL para cração da tabela!</a></li>
+                
+            <li class="second-level"><a href="#flask-para-armazenamento-de-dados">Flask para Armazenamento de Dados</a></li>
+                
+            <li class="second-level"><a href="#vamos-testar-com-requestshttp">Vamos testar com requests.http</a></li>
+                
+            <li class="second-level"><a href="#este-e-um-pacote-de-demonstracao-seu-grupo-pode-e-deve-criar-uma-arquitetura-propria-com-testes">Este é um pacote de demonstração: seu grupo pode e deve criar uma arquitetura própria com Testes!</a></li>
+                
+        <li class="first-level "><a href="#tarefa">Tarefa</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -210,16 +228,19 @@
 <tr>
 <th>Autoestudo</th>
 <th>Link</th>
+<th>Pontuação</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Pacote de Ingestão de Dados</td>
 <td><a href="https://colab.research.google.com/drive/1LJDhsksOxlcf6srx7QIsHAGxu1hGJe5m?usp=sharing">Acesse</a></td>
+<td>3 pontos</td>
 </tr>
 <tr>
 <td>Consultas complexas em SQL</td>
 <td><a href="https://integrada.minhabiblioteca.com.br/reader/books/9786556900186/pageid/118">Acesse</a></td>
+<td>0 pontos</td>
 </tr>
 </tbody>
 </table>
@@ -242,7 +263,197 @@
 </tr>
 </tbody>
 </table>
-<h1 id="demonstracao-pratica-de-um-pacote-python">Demonstração Prática de Um Pacote Python<a class="headerlink" href="#demonstracao-pratica-de-um-pacote-python" title="Permanent link">&para;</a></h1></div>
+<h1 id="demonstracao-pratica-de-um-pacote-python">Demonstração Prática de Um Pacote Python<a class="headerlink" href="#demonstracao-pratica-de-um-pacote-python" title="Permanent link">&para;</a></h1>
+<h2 id="pre-requisitos">Pré-requisitos<a class="headerlink" href="#pre-requisitos" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Conhecimento básico em Python e Docker.</li>
+<li>Instalação do Docker e Docker Compose.</li>
+<li>Instalação do Poetry.</li>
+</ul>
+<h2 id="estrutura-da-aula">Estrutura da Aula<a class="headerlink" href="#estrutura-da-aula" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Criar o Pacote Poetry</li>
+<li>Configurar o Docker Compose com MinIO e ClickHouse</li>
+<li>Coletar Dados de uma API Aberta</li>
+<li>Armazenar Dados Brutos no MinIO</li>
+<li>Criar um Módulo de ETL Simples</li>
+<li>Visualizar Dados no ClickHouse com DBeaver</li>
+</ol>
+<h3 id="criando-o-pacote">Criando o Pacote<a class="headerlink" href="#criando-o-pacote" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>poetry<span class="w"> </span>new<span class="w"> </span>data_pipeline
+<span class="nb">cd</span><span class="w"> </span>data_pipeline
+</code></pre></div>
+
+<h3 id="pyprojecttoml">Pyproject.toml<a class="headerlink" href="#pyprojecttoml" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>data_pipeline
+poetry<span class="w"> </span>add<span class="w"> </span>flask<span class="w"> </span>requests<span class="w"> </span>pandas<span class="w"> </span>pyarrow<span class="w"> </span>minio<span class="w"> </span>clickhouse-connect
+</code></pre></div>
+
+<h3 id="configurar-o-docker-compose-com-minio-e-clickhouse">Configurar o Docker Compose com MinIO e ClickHouse<a class="headerlink" href="#configurar-o-docker-compose-com-minio-e-clickhouse" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>version: &#39;3.8&#39;
+
+services:
+  minio:
+    image: minio/minio
+    container_name: minio
+    ports:
+      <span class="k">-</span> &quot;9000:9000&quot;
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data
+
+  clickhouse:
+    image: yandex/clickhouse-server
+    container_name: clickhouse
+    ports:
+      <span class="k">-</span> &quot;8123:8123&quot;
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+
+<h2 id="vamos-testar-o-miniio">Vamos testar o Mini.IO<a class="headerlink" href="#vamos-testar-o-miniio" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">minio_test</span> <span class="kn">import</span> <span class="n">Minio</span>
+<span class="kn">from</span> <span class="nn">minio.error</span> <span class="kn">import</span> <span class="n">S3Error</span>
+
+<span class="k">def</span> <span class="nf">test_minio</span><span class="p">():</span>
+    <span class="c1"># Configuração do cliente MinIO</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">Minio</span><span class="p">(</span>
+        <span class="s2">&quot;localhost:9000&quot;</span><span class="p">,</span>  <span class="c1"># Endereço do MinIO</span>
+        <span class="n">access_key</span><span class="o">=</span><span class="s2">&quot;minioadmin&quot;</span><span class="p">,</span>  <span class="c1"># Chave de acesso</span>
+        <span class="n">secret_key</span><span class="o">=</span><span class="s2">&quot;minioadmin&quot;</span><span class="p">,</span>  <span class="c1"># Chave secreta</span>
+        <span class="n">secure</span><span class="o">=</span><span class="kc">False</span>  <span class="c1"># Use True se estiver usando HTTPS</span>
+    <span class="p">)</span>
+
+    <span class="n">bucket_name</span> <span class="o">=</span> <span class="s2">&quot;test-bucket&quot;</span>
+    <span class="n">object_name</span> <span class="o">=</span> <span class="s2">&quot;test.txt&quot;</span>
+    <span class="n">file_content</span> <span class="o">=</span> <span class="s2">&quot;Este é um arquivo de teste.&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Criar bucket se não existir</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">client</span><span class="o">.</span><span class="n">bucket_exists</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">):</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">make_bucket</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bucket &#39;</span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">&#39; criado com sucesso.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bucket &#39;</span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">&#39; já existe.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Criar um arquivo de teste</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">object_name</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">file_content</span><span class="p">)</span>
+
+        <span class="c1"># Fazer upload do arquivo para o MinIO</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">fput_object</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span> <span class="n">object_name</span><span class="p">,</span> <span class="n">object_name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Arquivo &#39;</span><span class="si">{</span><span class="n">object_name</span><span class="si">}</span><span class="s2">&#39; enviado com sucesso para o bucket &#39;</span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Fazer download do arquivo do MinIO</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">fget_object</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span> <span class="n">object_name</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;downloaded_</span><span class="si">{</span><span class="n">object_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Arquivo &#39;</span><span class="si">{</span><span class="n">object_name</span><span class="si">}</span><span class="s2">&#39; baixado com sucesso do bucket &#39;</span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Ler o conteúdo do arquivo baixado</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;downloaded_</span><span class="si">{</span><span class="n">object_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">downloaded_content</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Conteúdo do arquivo baixado: </span><span class="si">{</span><span class="n">downloaded_content</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="n">S3Error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Erro ao interagir com o MinIO: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">test_minio</span><span class="p">()</span>
+</code></pre></div>
+
+<h2 id="sql-para-cracao-da-tabela">SQL para cração da tabela!<a class="headerlink" href="#sql-para-cracao-da-tabela" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">working_data</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">data_ingestao</span><span class="w"> </span><span class="n">DateTime</span><span class="p">,</span>
+<span class="w">    </span><span class="n">dado_linha</span><span class="w"> </span><span class="n">String</span><span class="p">,</span>
+<span class="w">    </span><span class="n">tag</span><span class="w"> </span><span class="n">String</span>
+<span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MergeTree</span><span class="p">()</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">data_ingestao</span><span class="p">;</span>
+</code></pre></div>
+
+<h2 id="flask-para-armazenamento-de-dados">Flask para Armazenamento de Dados<a class="headerlink" href="#flask-para-armazenamento-de-dados" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">jsonify</span>
+<span class="kn">from</span> <span class="nn">minio</span> <span class="kn">import</span> <span class="n">Minio</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pyarrow</span> <span class="k">as</span> <span class="nn">pa</span>
+<span class="kn">import</span> <span class="nn">pyarrow.parquet</span> <span class="k">as</span> <span class="nn">pq</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">clickhouse_connect</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Configuração do cliente MinIO</span>
+<span class="n">minio_client</span> <span class="o">=</span> <span class="n">Minio</span><span class="p">(</span>
+    <span class="s2">&quot;localhost:9000&quot;</span><span class="p">,</span>
+    <span class="n">access_key</span><span class="o">=</span><span class="s2">&quot;minioadmin&quot;</span><span class="p">,</span>
+    <span class="n">secret_key</span><span class="o">=</span><span class="s2">&quot;minioadmin&quot;</span><span class="p">,</span>
+    <span class="n">secure</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="c1"># Criar bucket se não existir</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">minio_client</span><span class="o">.</span><span class="n">bucket_exists</span><span class="p">(</span><span class="s2">&quot;raw-data&quot;</span><span class="p">):</span>
+    <span class="n">minio_client</span><span class="o">.</span><span class="n">make_bucket</span><span class="p">(</span><span class="s2">&quot;raw-data&quot;</span><span class="p">)</span>
+
+<span class="c1"># Função para executar o script SQL</span>
+<span class="k">def</span> <span class="nf">execute_sql_script</span><span class="p">():</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">clickhouse_connect</span><span class="o">.</span><span class="n">get_client</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8123</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;sql/init_db.sql&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">sql_script</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">sql_script</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/data&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">receive_data</span><span class="p">():</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span> <span class="ow">or</span> <span class="s1">&#39;date&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">or</span> <span class="s1">&#39;dados&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Formato de dados inválido&quot;</span><span class="p">}),</span> <span class="mi">400</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+        <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dados&#39;</span><span class="p">])</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Tipo de dados inválido&quot;</span><span class="p">}),</span> <span class="mi">400</span>
+
+    <span class="c1"># Criar DataFrame e salvar como Parquet</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">data</span><span class="p">])</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;raw_data_</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">.parquet&quot;</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">pq</span><span class="o">.</span><span class="n">write_table</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+    <span class="c1"># Fazer upload para o MinIO</span>
+    <span class="n">minio_client</span><span class="o">.</span><span class="n">fput_object</span><span class="p">(</span><span class="s2">&quot;raw-data&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+    <span class="c1"># Ler arquivo Parquet do MinIO</span>
+    <span class="n">minio_client</span><span class="o">.</span><span class="n">fget_object</span><span class="p">(</span><span class="s2">&quot;raw-data&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;downloaded_</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">df_parquet</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;downloaded_</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Inserir dados no ClickHouse</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">clickhouse_connect</span><span class="o">.</span><span class="n">get_client</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8123</span><span class="p">)</span>
+    <span class="n">df_parquet</span><span class="p">[</span><span class="s1">&#39;data_ingestao&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="n">df_parquet</span><span class="p">[</span><span class="s1">&#39;dado_linha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_parquet</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">df_parquet</span><span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;example_tag&#39;</span>
+
+    <span class="n">client</span><span class="o">.</span><span class="n">insert_df</span><span class="p">(</span><span class="s1">&#39;working_data&#39;</span><span class="p">,</span> <span class="n">df_parquet</span><span class="p">[[</span><span class="s1">&#39;data_ingestao&#39;</span><span class="p">,</span> <span class="s1">&#39;dado_linha&#39;</span><span class="p">,</span> <span class="s1">&#39;tag&#39;</span><span class="p">]])</span>
+
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Dados recebidos, armazenados e processados com sucesso&quot;</span><span class="p">}),</span> <span class="mi">200</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">execute_sql_script</span><span class="p">()</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="vamos-testar-com-requestshttp">Vamos testar com requests.http<a class="headerlink" href="#vamos-testar-com-requestshttp" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code><span class="err">POST http://localhost:5000/data</span>
+<span class="err">Content-Type: application/json</span>
+
+<span class="err">{</span>
+<span class="err">    &quot;date&quot;: 1691836800,</span>
+<span class="err">    &quot;dados&quot;: 42</span>
+<span class="err">}</span>
+</code></pre></div>
+
+<h2 id="este-e-um-pacote-de-demonstracao-seu-grupo-pode-e-deve-criar-uma-arquitetura-propria-com-testes">Este é um pacote de demonstração: seu grupo pode e deve criar uma arquitetura própria com Testes!<a class="headerlink" href="#este-e-um-pacote-de-demonstracao-seu-grupo-pode-e-deve-criar-uma-arquitetura-propria-com-testes" title="Permanent link">&para;</a></h2>
+<h1 id="tarefa">Tarefa<a class="headerlink" href="#tarefa" title="Permanent link">&para;</a></h1>
+<p>Fazer em sala de aula a Ponderada!</p></div>
         
         
     </div>
