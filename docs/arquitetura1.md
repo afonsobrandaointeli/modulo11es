@@ -17,6 +17,10 @@
 |Vamos subir o Supabase e Analisar uma Arquitetura|60     |
 |**Total**                                        |**120**|
 
+# Vídeo da Aula
+
+<iframe width="100%" height="640" src="https://www.youtube.com/embed/g4hnMgzwNIg?si=CN3Q4kL0G4RT6foh" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Kahoot
 
 <a href="https://kahoot.it/" target="blank_" class="btn btn-primary" style="width: 100%; margin: 10px;"><strong>📟Kahoot.it!</strong></a>
