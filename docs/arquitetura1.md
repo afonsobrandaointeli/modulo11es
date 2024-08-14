@@ -559,3 +559,11 @@ df.to_parquet(parquet_file, engine='pyarrow')
 
 print("Arquivo CSV transformado em Parquet com sucesso!")
 ```
+
+# Exemplo de Arquitetura Visual -> Grupo 01 do Curso de SI do Inteli em 2023.4
+
+![Arquitetura Macro](../assets/images/arquitetura%20de%20dados%20macro.png)
+![Distribuição de Tarefas](../assets/images/distribuição%20de%20tarefas.png)
+![Protocolos](../assets/images/protocolos.png)
+![Tecnologias](../assets/images/tecnologias.png)
+![Arquitetura Final](../assets/images/Final.png)
