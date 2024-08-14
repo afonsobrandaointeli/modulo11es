@@ -562,8 +562,8 @@ print("Arquivo CSV transformado em Parquet com sucesso!")
 
 # Exemplo de Arquitetura Visual -> Grupo 01 do Curso de SI do Inteli em 2023.4
 
-![Arquitetura Macro](../assets/images/arquitetura%20de%20dados%20macro.png)
-![Distribuição de Tarefas](../assets/images/distribuição%20de%20tarefas.png)
-![Protocolos](../assets/images/protocolos.png)
-![Tecnologias](../assets/images/tecnologias.png)
-![Arquitetura Final](../assets/images/Final.png)
+![Arquitetura Macro](https://res.cloudinary.com/dyhjjms8y/image/upload/v1723646274/arquitetura_de_dados_macro_vowkzo.png)
+![Distribuição de Tarefas](https://res.cloudinary.com/dyhjjms8y/image/upload/v1723646274/distribui%C3%A7%C3%A3o_de_tarefas_mdgqyj.png)
+![Protocolos](https://res.cloudinary.com/dyhjjms8y/image/upload/v1723646274/protocolos_hdmj4a.png)
+![Tecnologias](https://res.cloudinary.com/dyhjjms8y/image/upload/v1723646274/tecnologias_kleqqi.png)
+![Arquitetura Final](https://res.cloudinary.com/dyhjjms8y/image/upload/v1723646274/Final_yvsfyz.png)
