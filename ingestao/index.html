@@ -213,6 +213,9 @@
                 
             <li class="second-level"><a href="#vamos-testar-com-requestshttp">Vamos testar com requests.http</a></li>
                 
+        <li class="first-level "><a href="#adicione-uma-view-no-clickhouse">Adicione uma View no ClickHouse</a></li>
+        <li class="first-level "><a href="#adicione-um-streamlit">Adicione um Streamlit</a></li>
+        <li class="first-level "><a href="#atualize-o-docker-compose">Atualize o Docker Compose</a></li>
             <li class="second-level"><a href="#este-e-um-pacote-de-demonstracao-seu-grupo-pode-e-deve-criar-uma-arquitetura-propria-com-testes">Este é um pacote de demonstração: seu grupo pode e deve criar uma arquitetura própria com Testes!</a></li>
                 
         <li class="first-level "><a href="#tarefa">Tarefa</a></li>
@@ -286,7 +289,7 @@
 
 <h3 id="pyprojecttoml">Pyproject.toml<a class="headerlink" href="#pyprojecttoml" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>data_pipeline
-poetry<span class="w"> </span>add<span class="w"> </span>flask<span class="w"> </span>requests<span class="w"> </span>pandas<span class="w"> </span>pyarrow<span class="w"> </span>minio<span class="w"> </span>clickhouse-connect
+poetry<span class="w"> </span>add<span class="w"> </span>flask<span class="w"> </span>requests<span class="w"> </span>pandas<span class="w"> </span>pyarrow<span class="w"> </span>minio<span class="w"> </span>clickhouse-connect<span class="w"> </span>streamlit
 </code></pre></div>
 
 <h3 id="configurar-o-docker-compose-com-minio-e-clickhouse">Configurar o Docker Compose com MinIO e ClickHouse<a class="headerlink" href="#configurar-o-docker-compose-com-minio-e-clickhouse" title="Permanent link">&para;</a></h3>
@@ -449,6 +452,84 @@ services:
 <span class="err">    &quot;date&quot;: 1691836800,</span>
 <span class="err">    &quot;dados&quot;: 42</span>
 <span class="err">}</span>
+</code></pre></div>
+
+<h1 id="adicione-uma-view-no-clickhouse">Adicione uma View no ClickHouse<a class="headerlink" href="#adicione-uma-view-no-clickhouse" title="Permanent link">&para;</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">ingestion_view</span><span class="w"> </span><span class="k">AS</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">working_data</span><span class="p">;</span>
+</code></pre></div>
+
+<h1 id="adicione-um-streamlit">Adicione um Streamlit<a class="headerlink" href="#adicione-um-streamlit" title="Permanent link">&para;</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">clickhouse_connect</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Conectando ao ClickHouse</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">clickhouse_connect</span><span class="o">.</span><span class="n">get_client</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8123</span><span class="p">)</span>
+
+<span class="c1"># Consultando a view</span>
+<span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM ingestion_view&quot;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">result_rows</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">column_names</span><span class="p">)</span>
+
+<span class="c1"># Exibindo os dados em uma tabela</span>
+<span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Visualização de Dados&quot;</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Tabela de Dados Ingeridos&quot;</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Criando um gráfico simples</span>
+<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Gráfico de Dados Ingeridos&quot;</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">line_chart</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;dados&#39;</span><span class="p">])</span>  <span class="c1"># Supondo que &#39;dados&#39; é uma coluna numérica</span>
+</code></pre></div>
+
+<h1 id="atualize-o-docker-compose">Atualize o Docker Compose<a class="headerlink" href="#atualize-o-docker-compose" title="Permanent link">&para;</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="n">version: &#39;3.8&#39;</span>
+
+<span class="n">services:</span>
+<span class="n">  minio:</span>
+<span class="n">    image: minio/minio</span>
+<span class="n">    container_name: minio</span>
+<span class="n">    ports:</span>
+<span class="n">      - &#39;9000:9000&#39;</span>
+<span class="n">    environment:</span>
+<span class="n">      MINIO_ROOT_USER: minioadmin</span>
+<span class="n">      MINIO_ROOT_PASSWORD: minioadmin</span>
+<span class="n">    command: server /data</span>
+
+<span class="n">  clickhouse:</span>
+<span class="n">    image: yandex/clickhouse-server</span>
+<span class="n">    container_name: clickhouse</span>
+<span class="n">    ports:</span>
+<span class="n">      - &#39;8123:8123&#39;</span>
+<span class="n">    environment:</span>
+<span class="n">      CLICKHOUSE_USER: default</span>
+<span class="n">      CLICKHOUSE_PASSWORD: securepassword  # Substitua por uma senha forte</span>
+<span class="n">    volumes:</span>
+<span class="n">      - ./clickhouse-config.xml:/etc/clickhouse-server/config.xml</span>
+<span class="n">      - ./clickhouse-users.xml:/etc/clickhouse-server/users.xml</span>
+<span class="n">    command: </span>
+<span class="n">      - &#39;--config-file=/etc/clickhouse-server/config.xml&#39;</span>
+
+<span class="n">  streamlit:</span>
+<span class="n">    image: streamlit/streamlit</span>
+<span class="n">    container_name: streamlit</span>
+<span class="n">    ports:</span>
+<span class="n">      - &#39;8501:8501&#39;</span>
+<span class="n">    volumes:</span>
+<span class="n">      - ./app:/app</span>
+<span class="n">    command: streamlit run /app/app.py --server.port=8501</span>
+
+<span class="n">  flask:</span>
+<span class="n">    build:</span>
+<span class="n">      context: ./app</span>
+<span class="n">      dockerfile: Dockerfile</span>
+<span class="n">    container_name: flask</span>
+<span class="n">    ports:</span>
+<span class="n">      - &#39;5000:5000&#39;</span>
+<span class="n">    environment:</span>
+<span class="n">      FLASK_ENV: development</span>
+<span class="n">      FLASK_RUN_HOST: 0.0.0.0</span>
+<span class="n">      FLASK_RUN_PORT: 5000</span>
 </code></pre></div>
 
 <h2 id="este-e-um-pacote-de-demonstracao-seu-grupo-pode-e-deve-criar-uma-arquitetura-propria-com-testes">Este é um pacote de demonstração: seu grupo pode e deve criar uma arquitetura própria com Testes!<a class="headerlink" href="#este-e-um-pacote-de-demonstracao-seu-grupo-pode-e-deve-criar-uma-arquitetura-propria-com-testes" title="Permanent link">&para;</a></h2>
