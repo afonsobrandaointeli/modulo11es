@@ -216,6 +216,7 @@
             <li class="second-level"><a href="#este-e-um-pacote-de-demonstracao-seu-grupo-pode-e-deve-criar-uma-arquitetura-propria-com-testes">Este é um pacote de demonstração: seu grupo pode e deve criar uma arquitetura própria com Testes!</a></li>
                 
         <li class="first-level "><a href="#tarefa">Tarefa</a></li>
+        <li class="first-level "><a href="#video-da-aula">Vídeo da Aula</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -424,10 +425,6 @@ poetry<span class="w"> </span>add<span class="w"> </span>flask<span class="w"> <
 </code></pre></div>
 
 <p><code>minio_client.py</code></p>
-<div class="codehilite"><pre><span></span><code>
-</code></pre></div>
-
-<p>e na pasta raiz o <code>app.py</code></p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">minio</span> <span class="kn">import</span> <span class="n">Minio</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
@@ -457,6 +454,53 @@ poetry<span class="w"> </span>add<span class="w"> </span>flask<span class="w"> <
 
 <span class="k">def</span> <span class="nf">download_file</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">local_file_path</span><span class="p">):</span>
     <span class="n">minio_client</span><span class="o">.</span><span class="n">fget_object</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">local_file_path</span><span class="p">)</span>
+</code></pre></div>
+
+<p>e na pasta raiz o <code>app.py</code></p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">jsonify</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">data_pipeline.minio_client</span> <span class="kn">import</span> <span class="n">create_bucket_if_not_exists</span><span class="p">,</span> <span class="n">upload_file</span><span class="p">,</span> <span class="n">download_file</span>
+<span class="kn">from</span> <span class="nn">data_pipeline.clickhouse_client</span> <span class="kn">import</span> <span class="n">execute_sql_script</span><span class="p">,</span> <span class="n">get_client</span><span class="p">,</span> <span class="n">insert_dataframe</span>
+<span class="kn">from</span> <span class="nn">data_pipeline.data_processing</span> <span class="kn">import</span> <span class="n">process_data</span><span class="p">,</span> <span class="n">prepare_dataframe_for_insert</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Criar bucket se não existir</span>
+<span class="n">create_bucket_if_not_exists</span><span class="p">(</span><span class="s2">&quot;raw-data&quot;</span><span class="p">)</span>
+
+<span class="c1"># Executar o script SQL para criar a tabela</span>
+<span class="n">execute_sql_script</span><span class="p">(</span><span class="s1">&#39;sql/create_table.sql&#39;</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/data&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">receive_data</span><span class="p">():</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span> <span class="ow">or</span> <span class="s1">&#39;date&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">or</span> <span class="s1">&#39;dados&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Formato de dados inválido&quot;</span><span class="p">}),</span> <span class="mi">400</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+        <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dados&#39;</span><span class="p">])</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Tipo de dados inválido&quot;</span><span class="p">}),</span> <span class="mi">400</span>
+
+    <span class="c1"># Processar e salvar dados</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">process_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">upload_file</span><span class="p">(</span><span class="s2">&quot;raw-data&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+    <span class="c1"># Ler arquivo Parquet do MinIO</span>
+    <span class="n">download_file</span><span class="p">(</span><span class="s2">&quot;raw-data&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;downloaded_</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">df_parquet</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;downloaded_</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Preparar e inserir dados no ClickHouse</span>
+    <span class="n">df_prepared</span> <span class="o">=</span> <span class="n">prepare_dataframe_for_insert</span><span class="p">(</span><span class="n">df_parquet</span><span class="p">)</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">get_client</span><span class="p">()</span>  <span class="c1"># Obter o cliente ClickHouse</span>
+    <span class="n">insert_dataframe</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="s1">&#39;working_data&#39;</span><span class="p">,</span> <span class="n">df_prepared</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Dados recebidos, armazenados e processados com sucesso&quot;</span><span class="p">}),</span> <span class="mi">200</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
 </code></pre></div>
 
 <p>e o <code>.env</code></p>
@@ -490,7 +534,10 @@ CLICKHOUSE_PORT=8123
 
 <h2 id="este-e-um-pacote-de-demonstracao-seu-grupo-pode-e-deve-criar-uma-arquitetura-propria-com-testes">Este é um pacote de demonstração: seu grupo pode e deve criar uma arquitetura própria com Testes!<a class="headerlink" href="#este-e-um-pacote-de-demonstracao-seu-grupo-pode-e-deve-criar-uma-arquitetura-propria-com-testes" title="Permanent link">&para;</a></h2>
 <h1 id="tarefa">Tarefa<a class="headerlink" href="#tarefa" title="Permanent link">&para;</a></h1>
-<p><strong>Fazer em sala de aula a Ponderada!</strong></p></div>
+<p><strong>Fazer em sala de aula a Ponderada!</strong></p>
+
+<h1 id="video-da-aula">Vídeo da Aula<a class="headerlink" href="#video-da-aula" title="Permanent link">&para;</a></h1>
+<iframe width="100%" height="465" src="https://www.youtube.com/embed/GzzS6KM9R-4?si=i5xH81cWpOuu_Zu1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         
         
     </div>
