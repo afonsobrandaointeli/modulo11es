@@ -22,27 +22,18 @@
 - Instalação do Docker e Docker Compose.
 - Instalação do Poetry.
 
-## Estrutura da Aula
-
-1. Criar o Pacote Poetry
-2. Configurar o Docker Compose com MinIO e ClickHouse
-3. Coletar Dados de uma API Aberta
-4. Armazenar Dados Brutos no MinIO
-5. Criar um Módulo de ETL Simples
-6. Visualizar Dados no ClickHouse com DBeaver
 
 ### Criando o Pacote
 
 ```bash
 poetry new data_pipeline
-cd data_pipeline
 ```
 
 ### Pyproject.toml
 
 ```bash
 cd data_pipeline
-poetry add flask requests pandas pyarrow minio clickhouse-connect
+poetry add flask requests pandas pyarrow minio clickhouse-connect python-dotenv
 ```
 
 ### Configurar o Docker Compose com MinIO e ClickHouse
@@ -52,30 +43,44 @@ version: '3.8'
 
 services:
   minio:
-    image: minio/minio
+    image: minio/minio:latest
     container_name: minio
     ports:
-      - "9000:9000"
+      - "9000:9000"   # Porta para a API
+      - "9001:9001"   # Porta para a Web UI
     environment:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadmin
-    command: server /data
+    volumes:
+      - minio_data:/data  # Persistência de dados
+    command: server /data --console-address ":9001"
+    restart: always
 
   clickhouse:
-    image: yandex/clickhouse-server
+    image: yandex/clickhouse-server:latest
     container_name: clickhouse
     ports:
-      - "8123:8123"
+      - "8123:8123"  # Porta para a HTTP interface
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse  # Persistência de dados
+    restart: always
+
+volumes:
+  minio_data:
+    driver: local
+  clickhouse_data:
+    driver: local
+
 ```
 
 ```bash
-docker-compose up -d
+docker-compose up --build
 ```
 
 ## Vamos testar o Mini.IO
 
 ```python
-from minio_test import Minio
+from minio import Minio
 from minio.error import S3Error
 
 def test_minio():
@@ -125,6 +130,8 @@ if __name__ == "__main__":
 
 ## SQL para cração da tabela!
 
+Crie uma pasta `sql/` e o arquivo `create_table.sql` com o código:
+
 ```sql
 CREATE TABLE IF NOT EXISTS working_data (
     data_ingestao DateTime,
@@ -134,76 +141,110 @@ CREATE TABLE IF NOT EXISTS working_data (
 ORDER BY data_ingestao;
 ```
 
-## Flask para Armazenamento de Dados
+## Aplicativo Pipe de Dados
+
+Dentro da pasta `data_pipeline` crie os arquivos:
+
+`clickhouse_client.py`
 
 ```python
-from flask import Flask, request, jsonify
-from minio import Minio
+import clickhouse_connect
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Configuração do cliente ClickHouse
+CLICKHOUSE_HOST = os.getenv('CLICKHOUSE_HOST')
+CLICKHOUSE_PORT = os.getenv('CLICKHOUSE_PORT')
+
+def get_client():
+    return clickhouse_connect.get_client(host=CLICKHOUSE_HOST, port=CLICKHOUSE_PORT)
+
+def execute_sql_script(script_path):
+    client = get_client()
+    with open(script_path, 'r') as file:
+        sql_script = file.read()
+    client.command(sql_script)
+    return client
+
+def insert_dataframe(client, table_name, df):
+    client.insert_df(table_name, df)
+```
+
+`data_processing.py`
+
+```python
 import pandas as pd
 import pyarrow as pa
 import pyarrow.parquet as pq
 from datetime import datetime
-import clickhouse_connect
 
-app = Flask(__name__)
-
-# Configuração do cliente MinIO
-minio_client = Minio(
-    "localhost:9000",
-    access_key="minioadmin",
-    secret_key="minioadmin",
-    secure=False
-)
-
-# Criar bucket se não existir
-if not minio_client.bucket_exists("raw-data"):
-    minio_client.make_bucket("raw-data")
-
-# Função para executar o script SQL
-def execute_sql_script():
-    client = clickhouse_connect.get_client(host='localhost', port=8123)
-    with open('sql/init_db.sql', 'r') as file:
-        sql_script = file.read()
-    client.command(sql_script)
-
-@app.route('/data', methods=['POST'])
-def receive_data():
-    data = request.get_json()
-    if not data or 'date' not in data or 'dados' not in data:
-        return jsonify({"error": "Formato de dados inválido"}), 400
-
-    try:
-        datetime.fromtimestamp(data['date'])
-        int(data['dados'])
-    except (ValueError, TypeError):
-        return jsonify({"error": "Tipo de dados inválido"}), 400
-
+def process_data(data):
     # Criar DataFrame e salvar como Parquet
     df = pd.DataFrame([data])
     filename = f"raw_data_{datetime.now().strftime('%Y%m%d%H%M%S')}.parquet"
     table = pa.Table.from_pandas(df)
     pq.write_table(table, filename)
+    return filename
 
-    # Fazer upload para o MinIO
-    minio_client.fput_object("raw-data", filename, filename)
+def prepare_dataframe_for_insert(df):
+    df['data_ingestao'] = datetime.now()
+    df['dado_linha'] = df.apply(lambda row: row.to_json(), axis=1)
+    df['tag'] = 'example_tag'
+    return df[['data_ingestao', 'dado_linha', 'tag']]
+```
 
-    # Ler arquivo Parquet do MinIO
-    minio_client.fget_object("raw-data", filename, f"downloaded_{filename}")
-    df_parquet = pd.read_parquet(f"downloaded_{filename}")
+`minio_client.py`
 
-    # Inserir dados no ClickHouse
-    client = clickhouse_connect.get_client(host='localhost', port=8123)
-    df_parquet['data_ingestao'] = datetime.now()
-    df_parquet['dado_linha'] = df_parquet.apply(lambda row: row.to_json(), axis=1)
-    df_parquet['tag'] = 'example_tag'
+```python
 
-    client.insert_df('working_data', df_parquet[['data_ingestao', 'dado_linha', 'tag']])
+```
 
-    return jsonify({"message": "Dados recebidos, armazenados e processados com sucesso"}), 200
 
-if __name__ == '__main__':
-    execute_sql_script()
-    app.run(host='0.0.0.0', port=5000)
+e na pasta raiz o `app.py`
+
+```python
+from minio import Minio
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Carregar variáveis de ambiente
+MINIO_ENDPOINT = os.getenv('MINIO_ENDPOINT')
+MINIO_ACCESS_KEY = os.getenv('MINIO_ACCESS_KEY')
+MINIO_SECRET_KEY = os.getenv('MINIO_SECRET_KEY')
+
+# Configuração do cliente MinIO
+minio_client = Minio(
+    MINIO_ENDPOINT,
+    access_key=MINIO_ACCESS_KEY,
+    secret_key=MINIO_SECRET_KEY,
+    secure=False
+)
+
+def create_bucket_if_not_exists(bucket_name):
+    if not minio_client.bucket_exists(bucket_name):
+        minio_client.make_bucket(bucket_name)
+
+def upload_file(bucket_name, file_path):
+    file_name = os.path.basename(file_path)
+    minio_client.fput_object(bucket_name, file_name, file_path)
+
+def download_file(bucket_name, file_name, local_file_path):
+    minio_client.fget_object(bucket_name, file_name, local_file_path)
+```
+
+e o `.env`
+
+```text
+MINIO_ENDPOINT=localhost:9000
+MINIO_ACCESS_KEY=minioadmin
+MINIO_SECRET_KEY=minioadmin
+
+CLICKHOUSE_HOST=localhost
+CLICKHOUSE_PORT=8123
 ```
 
 ## Vamos testar com requests.http
@@ -213,13 +254,25 @@ POST http://localhost:5000/data
 Content-Type: application/json
 
 {
-    "date": 1691836800,
-    "dados": 42
+    "date": 1692345600,
+    "dados": 12345
 }
+```
+
+## Agora criamos a VIEW:
+
+```sql
+CREATE VIEW IF NOT EXISTS working_data_view AS
+SELECT
+    data_ingestao,
+    JSONExtractInt(dado_linha, 'date') AS date_unix,
+    JSONExtractInt(dado_linha, 'dados') AS dados,
+    toDateTime(JSONExtractInt(dado_linha, 'data_ingestao') / 1000) AS data_ingestao_datetime
+FROM working_data;
 ```
 
 ## Este é um pacote de demonstração: seu grupo pode e deve criar uma arquitetura própria com Testes!
 
 # Tarefa
 
-<p>Fazer em sala de aula a Ponderada!</p>
+<p><strong>Fazer em sala de aula a Ponderada!</strong></p>
