@@ -195,11 +195,215 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#servicos-e-etls-para-transformacao-de-dados-e-processamento-de-dados-em-escala-train-at-scale">Serviços e ETLs para Transformação de Dados e Processamento de Dados em Escala (train at scale)</a></li>
+        <li class="first-level "><a href="#aula-100-pratica">Aula 100% Prática!</a></li>
+        <li class="first-level "><a href="#mais-uma-ponderada">Mais uma Ponderada!</a></li>
+            <li class="second-level"><a href="#desafio-criacao-de-uma-etl">Desafio: Criação de uma ETL</a></li>
+                
+            <li class="second-level"><a href="#criterios-de-avaliacao">Critérios de Avaliação</a></li>
+                
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
-</div>
+<h1 id="servicos-e-etls-para-transformacao-de-dados-e-processamento-de-dados-em-escala-train-at-scale">Serviços e ETLs para Transformação de Dados e Processamento de Dados em Escala (train at scale)<a class="headerlink" href="#servicos-e-etls-para-transformacao-de-dados-e-processamento-de-dados-em-escala-train-at-scale" title="Permanent link">&para;</a></h1>
+<table>
+<thead>
+<tr>
+<th>Autoestudo</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Como você pode dimensionar processos de ETL para grandes volumes de dados em engenharia de banco de dados?</td>
+<td><a href="https://www.linkedin.com/advice/0/how-can-you-scale-etl-processes-large-data">Link</a></td>
+</tr>
+<tr>
+<td>Refatoração para Padrões</td>
+<td><a href="https://integrada.minhabiblioteca.com.br/reader/books/9788577803033/pageid/47">Link</a></td>
+</tr>
+</tbody>
+</table>
+<h1 id="aula-100-pratica">Aula 100% Prática!<a class="headerlink" href="#aula-100-pratica" title="Permanent link">&para;</a></h1>
+<p>Faça a instalação dos pacotes:</p>
+<div class="codehilite"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>prefect<span class="w"> </span>mlflow<span class="w"> </span>pandas<span class="w"> </span>scikit-learn<span class="w"> </span>xgboost
+</code></pre></div>
+
+<p>Depois estruturamos o projeto da seguinte forma:</p>
+<div class="codehilite"><pre><span></span><code>pipeline_voos/
+│
+├── data/
+│   └── voos.csv
+│
+├── src/
+│   ├── __init__.py
+│   ├── preprocess.py
+│   ├── train.py
+│   └── evaluate.py
+│
+└── main.py
+</code></pre></div>
+
+<p>Agora implementamos o src/preprocess.py</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">carregar_dados</span><span class="p">(</span><span class="n">caminho</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">caminho</span><span class="p">)</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">preprocessar_dados</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+    <span class="c1"># Simplificado para o exemplo</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;atraso&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;atraso_chegada&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dia_semana&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia&#39;</span><span class="p">]</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;atraso&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
+</code></pre></div>
+
+<p>Depois o src/evaluate.py</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span>
+<span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span>
+<span class="kn">import</span> <span class="nn">mlflow</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">avaliar_modelo</span><span class="p">(</span><span class="n">modelo</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">precision</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">recall</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;accuracy&quot;</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;precision&quot;</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;recall&quot;</span><span class="p">,</span> <span class="n">recall</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">accuracy</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">recall</span>
+</code></pre></div>
+
+<p>Por final, dentro do módulo, o train.py</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
+<span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span>
+<span class="kn">import</span> <span class="nn">mlflow</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">treinar_modelo</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
+        <span class="n">modelo</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">()</span>
+        <span class="n">modelo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+        <span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="s2">&quot;XGBClassifier&quot;</span><span class="p">)</span>
+        <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="n">modelo</span><span class="p">,</span> <span class="s2">&quot;modelo&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">modelo</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span>
+</code></pre></div>
+
+<p>Crie um voos.csv com este conteúdo:</p>
+<div class="codehilite"><pre><span></span><code>id,data,dia_semana,mes,origem,destino,companhia,horario_partida,horario_chegada,distancia,atraso_chegada
+1,2024-09-10,2,9,GRU,CGH,LATAM,08:00,09:00,30,0
+2,2024-09-10,2,9,CGH,BSB,GOL,10:30,12:30,870,20
+3,2024-09-10,2,9,GIG,SSA,AZUL,14:00,16:15,1200,5
+4,2024-09-11,3,9,FOR,REC,LATAM,07:45,09:00,630,0
+5,2024-09-11,3,9,BSB,GRU,GOL,11:15,13:00,870,30
+6,2024-09-12,4,9,CGH,GIG,AZUL,16:30,17:45,360,10
+7,2024-09-12,4,9,SSA,FOR,LATAM,09:00,11:00,1000,0
+8,2024-09-13,5,9,REC,BSB,GOL,13:45,16:15,1650,45
+9,2024-09-13,5,9,GRU,FOR,AZUL,22:00,01:30,2350,15
+10,2024-09-14,6,9,GIG,SSA,LATAM,06:30,08:45,1200,0
+</code></pre></div>
+
+<p>e o main.py na pasta raiz:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">flow</span>
+<span class="kn">from</span> <span class="nn">prefect.server.schemas.schedules</span> <span class="kn">import</span> <span class="n">CronSchedule</span>
+<span class="kn">from</span> <span class="nn">src.preprocess</span> <span class="kn">import</span> <span class="n">carregar_dados</span><span class="p">,</span> <span class="n">preprocessar_dados</span>
+<span class="kn">from</span> <span class="nn">src.train</span> <span class="kn">import</span> <span class="n">treinar_modelo</span>
+<span class="kn">from</span> <span class="nn">src.evaluate</span> <span class="kn">import</span> <span class="n">avaliar_modelo</span>
+<span class="kn">import</span> <span class="nn">mlflow</span>
+
+<span class="nd">@flow</span>
+<span class="k">def</span> <span class="nf">pipeline_voos</span><span class="p">():</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="s2">&quot;http://localhost:5000&quot;</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="s2">&quot;previsao_atrasos_voos&quot;</span><span class="p">)</span>
+
+    <span class="n">dados</span> <span class="o">=</span> <span class="n">carregar_dados</span><span class="p">(</span><span class="s2">&quot;data/voos.csv&quot;</span><span class="p">)</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">preprocessar_dados</span><span class="p">(</span><span class="n">dados</span><span class="p">)</span>
+    <span class="n">modelo</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">treinar_modelo</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">accuracy</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">recall</span> <span class="o">=</span> <span class="n">avaliar_modelo</span><span class="p">(</span><span class="n">modelo</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision: </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall: </span><span class="si">{</span><span class="n">recall</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">pipeline_voos</span><span class="p">()</span>
+
+    <span class="c1"># Criar e aplicar o deployment</span>
+    <span class="n">pipeline_voos</span><span class="o">.</span><span class="n">serve</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;pipeline_voos_local&quot;</span><span class="p">,</span>
+        <span class="n">schedule</span><span class="o">=</span><span class="n">CronSchedule</span><span class="p">(</span><span class="n">cron</span><span class="o">=</span><span class="s2">&quot;0 0 * * *&quot;</span><span class="p">,</span> <span class="n">timezone</span><span class="o">=</span><span class="s2">&quot;America/Sao_Paulo&quot;</span><span class="p">),</span>
+        <span class="n">work_queue_name</span><span class="o">=</span><span class="s2">&quot;local&quot;</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Deployment criado com sucesso. Inicie o servidor Prefect e um agente para executar o fluxo.&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Agora vamos rodar o mlflow:</p>
+<div class="codehilite"><pre><span></span><code>mlflow<span class="w"> </span>server<span class="w"> </span>--backend-store-uri<span class="w"> </span>sqlite:///mlflow.db<span class="w"> </span>--default-artifact-root<span class="w"> </span>./mlflow-artifacts<span class="w"> </span>--host<span class="w"> </span><span class="m">0</span>.0.0.0
+</code></pre></div>
+
+<p>E depois o prefect com:</p>
+<div class="codehilite"><pre><span></span><code>prefect<span class="w"> </span>server<span class="w"> </span>start
+</code></pre></div>
+
+<p>Finalmente o python main com:</p>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>main.py
+</code></pre></div>
+
+<p>Agora analisaremos o que aconteceu!</p>
+<h1 id="mais-uma-ponderada">Mais uma Ponderada!<a class="headerlink" href="#mais-uma-ponderada" title="Permanent link">&para;</a></h1>
+<h2 id="desafio-criacao-de-uma-etl">Desafio: Criação de uma ETL<a class="headerlink" href="#desafio-criacao-de-uma-etl" title="Permanent link">&para;</a></h2>
+<p>O aluno deverá criar, com seu grupo, uma <strong>ETL</strong> para transformar os dados <strong>RAW</strong> no <strong>Data Lake</strong> em dados <strong>WORK</strong>, para serem absorvidos no sistema de banco de dados relacional.</p>
+<h2 id="criterios-de-avaliacao">Critérios de Avaliação<a class="headerlink" href="#criterios-de-avaliacao" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Eficiência na Extração, Transformação e Carga (ETL) (30%)</strong>: </li>
+<li>
+<p>O aluno deve fazer uma implementação sólida e eficiente da ETL, levando em conta os requisitos de transformação dos dados <strong>RAW</strong> para os dados de trabalho (<strong>WORK</strong>).</p>
+</li>
+<li>
+<p><strong>Integração com o Sistema de Banco de Dados Relacional (25%)</strong>: </p>
+</li>
+<li>
+<p>O aluno deve integrar a implementação de forma adequada com o modelo de dados, garantindo a absorção correta dos dados.</p>
+</li>
+<li>
+<p><strong>Organização e Clareza do Código (20%)</strong>: </p>
+</li>
+<li>
+<p>O código deve ser claro, organizado de forma lógica e seguir boas práticas de programação.</p>
+</li>
+<li>
+<p><strong>Documentação e Comentários (15%)</strong>: </p>
+</li>
+<li>O código deve conter comentários que permitam sua completa compreensão.</li>
+</ol>
+<p><strong>Pontuação Total</strong>: 100%</p>
+<table>
+<thead>
+<tr>
+<th>DICA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cada aluno deve escolher um csv ou parquete criar a etl com extract jsons para mandar para a camada working ;)</td>
+</tr>
+</tbody>
+</table></div>
         
         
     </div>
