@@ -195,11 +195,269 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#data-lakes-e-data-warehouses">Data Lakes e Data Warehouses</a></li>
+        <li class="first-level "><a href="#bancos-de-dados-databases">Bancos de Dados (Databases)</a></li>
+            <li class="second-level"><a href="#caracteristicas-principais">Características Principais</a></li>
+                
+        <li class="first-level "><a href="#data-warehouses">Data Warehouses</a></li>
+            <li class="second-level"><a href="#definicao">Definição</a></li>
+                
+            <li class="second-level"><a href="#principais-vantagens">Principais Vantagens</a></li>
+                
+        <li class="first-level "><a href="#data-lakes">Data Lakes</a></li>
+            <li class="second-level"><a href="#caracteristicas-principais_1">Características Principais</a></li>
+                
+            <li class="second-level"><a href="#casos-de-uso">Casos de Uso</a></li>
+                
+        <li class="first-level "><a href="#diferencas-entre-data-warehouses-e-data-lakes">Diferenças Entre Data Warehouses e Data Lakes</a></li>
+        <li class="first-level "><a href="#exemplo-no-google-colab">Exemplo no Google Colab</a></li>
+            <li class="second-level"><a href="#1-criacao-do-data-warehouse">1. Criação do Data Warehouse</a></li>
+                
+            <li class="second-level"><a href="#2-criacao-do-datamart">2. Criação do DataMart</a></li>
+                
+            <li class="second-level"><a href="#explicacao">Explicação:</a></li>
+                
+        <li class="first-level "><a href="#ponderada">Ponderada</a></li>
+            <li class="second-level"><a href="#criacao-de-dashboard-de-telemetria-do-data-lake-e-do-data-warehouse">Criação de Dashboard de Telemetria do Data Lake e do Data Warehouse</a></li>
+                
+            <li class="second-level"><a href="#comando">Comando:</a></li>
+                
+            <li class="second-level"><a href="#criterios-de-avaliacao">Critérios de Avaliação:</a></li>
+                
+            <li class="second-level"><a href="#pontuacao-total-100-pontos">Pontuação Total: 100 pontos</a></li>
+                
+        <li class="first-level "><a href="#barema-de-qualidade">Barema de Qualidade</a></li>
+            <li class="second-level"><a href="#1-compreensao-dos-dados-25">1. Compreensão dos Dados (25%)</a></li>
+                
+            <li class="second-level"><a href="#2-selecao-de-metricas-relevantes-20">2. Seleção de Métricas Relevantes (20%)</a></li>
+                
+            <li class="second-level"><a href="#3-eficiencia-na-integracao-de-dados-25">3. Eficiência na Integração de Dados (25%)</a></li>
+                
+            <li class="second-level"><a href="#4-design-e-usabilidade-do-dashboard-20">4. Design e Usabilidade do Dashboard (20%)</a></li>
+                
+            <li class="second-level"><a href="#5-analise-e-interpretacao-dos-resultados-10">5. Análise e Interpretação dos Resultados (10%)</a></li>
+                
+            <li class="second-level"><a href="#pontuacao-total-100">Pontuação Total: 100%</a></li>
+                
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
-</div>
+<h1 id="data-lakes-e-data-warehouses">Data Lakes e Data Warehouses<a class="headerlink" href="#data-lakes-e-data-warehouses" title="Permanent link">&para;</a></h1>
+<p>Bem-vindo(a) à aula de hoje, onde vamos explorar conceitos importantes relacionados a <strong>bancos de dados</strong>, <strong>data warehouses</strong> e <strong>data lakes</strong>. Estes componentes desempenham papéis fundamentais em sistemas modernos de armazenamento e análise de dados. Vamos entender suas diferenças e como cada um pode ser utilizado de forma eficiente.</p>
+<hr />
+<table>
+<thead>
+<tr>
+<th>Autoestudo</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Databases Vs Data Warehouses Vs Data Lakes - What Is The Difference And Why Should You Care?</td>
+<td><a href="https://youtu.be/FxpRL0m9BcA?feature=shared">Link</a></td>
+</tr>
+<tr>
+<td>Qual é a diferença entre um data warehouse, um data lake e um data mart?</td>
+<td><a href="https://aws.amazon.com/pt/compare/the-difference-between-a-data-warehouse-data-lake-and-data-mart/">Link</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<iframe src="https://docs.google.com/presentation/d/1NqZKIvlY6KzL8OWAD_Ggzf-XI5xpwasg/embed?start=false&loop=false&delayms=3000" frameborder="0" width="800" height="486" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+<h1 id="bancos-de-dados-databases">Bancos de Dados (Databases)<a class="headerlink" href="#bancos-de-dados-databases" title="Permanent link">&para;</a></h1>
+<p>Os <strong>bancos de dados</strong> são frequentemente usados para armazenar e gerenciar dados transacionais, comumente em sistemas <strong>OLTP (Online Transaction Processing)</strong>. Bancos de dados tradicionais incluem MySQL, PostgreSQL, Oracle e Microsoft SQL Server. Eles geralmente seguem o modelo de <strong>armazenamento baseado em linhas (row-based storage)</strong>, ideal para operações CRUD (Create, Read, Update, Delete), como:</p>
+<ul>
+<li><strong>Criação</strong> de registros</li>
+<li><strong>Leitura</strong> de dados específicos</li>
+<li><strong>Atualização</strong> de registros existentes</li>
+<li><strong>Exclusão</strong> de dados</li>
+</ul>
+<h3 id="caracteristicas-principais">Características Principais<a class="headerlink" href="#caracteristicas-principais" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Eficiência nas operações transacionais</strong>: sistemas transacionais como o backend do Facebook ainda utilizam bancos de dados tradicionais como MySQL para operações em grande escala.</li>
+<li><strong>Limitações para análises</strong>: embora seja possível realizar análises diretamente em bancos de dados, isso pode ser ineficiente e até arriscado, pois pode afetar a performance de sistemas que lidam com transações.</li>
+</ul>
+<hr />
+<h1 id="data-warehouses">Data Warehouses<a class="headerlink" href="#data-warehouses" title="Permanent link">&para;</a></h1>
+<p>Os <strong>Data Warehouses (Armazéns de Dados)</strong> surgem como solução para análises históricas e complexas de dados. Diferente dos bancos de dados OLTP, os data warehouses são voltados para o processamento analítico <strong>OLAP (Online Analytical Processing)</strong>.</p>
+<h3 id="definicao">Definição<a class="headerlink" href="#definicao" title="Permanent link">&para;</a></h3>
+<p>De acordo com <strong>Bill Inman</strong>, considerado o "pai" do data warehouse, um data warehouse é uma <strong>coleção orientada a assuntos, integrada, variante no tempo e não volátil de dados,</strong> usada para dar suporte à tomada de decisões gerenciais.</p>
+<h3 id="principais-vantagens">Principais Vantagens<a class="headerlink" href="#principais-vantagens" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Armazenamento de dados históricos</strong>: permitem manter registros detalhados ao longo do tempo, essenciais para análises temporais.</li>
+<li><strong>Integração de dados</strong>: combinam dados de diversas fontes (ex.: Salesforce, sistemas internos) em um único repositório.</li>
+<li><strong>Estrutura em estrela ou floco de neve</strong>: são frequentemente organizados em esquemas estruturados para otimizar consultas analíticas.</li>
+</ul>
+<hr />
+<h1 id="data-lakes">Data Lakes<a class="headerlink" href="#data-lakes" title="Permanent link">&para;</a></h1>
+<p>Os <strong>Data Lakes</strong> surgiram como uma solução mais flexível para lidar com grandes volumes de dados não estruturados ou semi-estruturados. Eles são amplamente utilizados em projetos de <strong>ciência de dados</strong> e <strong>machine learning</strong>.</p>
+<h3 id="caracteristicas-principais_1">Características Principais<a class="headerlink" href="#caracteristicas-principais_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Flexibilidade no armazenamento</strong>: permitem armazenar dados em qualquer formato (ex.: JSON, Parquet, CSV), o que os torna mais flexíveis que os data warehouses.</li>
+<li><strong>Schema on Read</strong>: o esquema é aplicado durante a leitura dos dados, oferecendo maior flexibilidade em comparação aos data warehouses.</li>
+<li><strong>Uso em análises exploratórias</strong>: data lakes são ideais para análises exploratórias antes de os dados serem movidos para um data warehouse para produção.</li>
+</ul>
+<h3 id="casos-de-uso">Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Ciência de dados e machine learning</strong>: oferecem o ambiente ideal para análises exploratórias.</li>
+<li><strong>Processamento de dados em tempo real</strong>: permite relatórios operacionais rápidos, sem a necessidade de aguardar longos processos de ETL.</li>
+</ul>
+<hr />
+<h1 id="diferencas-entre-data-warehouses-e-data-lakes">Diferenças Entre Data Warehouses e Data Lakes<a class="headerlink" href="#diferencas-entre-data-warehouses-e-data-lakes" title="Permanent link">&para;</a></h1>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Data Warehouse</th>
+<th>Data Lake</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Estrutura</strong></td>
+<td>Altamente estruturado (Esquemas)</td>
+<td>Menos estruturado (armazenamento flexível)</td>
+</tr>
+<tr>
+<td><strong>Uso</strong></td>
+<td>Relatórios e decisões gerenciais</td>
+<td>Análise exploratória, machine learning</td>
+</tr>
+<tr>
+<td><strong>Armazenamento</strong></td>
+<td>Armazenamento em colunas ou linhas</td>
+<td>Arquivos (JSON, Parquet, etc.)</td>
+</tr>
+<tr>
+<td><strong>Histórico de Dados</strong></td>
+<td>Mantém dados históricos</td>
+<td>Pode ou não armazenar histórico</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="exemplo-no-google-colab">Exemplo no Google Colab<a class="headerlink" href="#exemplo-no-google-colab" title="Permanent link">&para;</a></h1>
+<p>Vamos criar um exemplo simples de DataMart utilizando Python no Colab, onde teremos tanto um <strong>Data Warehouse</strong> quanto um <strong>DataMart</strong>. Para isso, utilizaremos o pandas para simular a criação de tabelas e a manipulação de dados. Segue o passo a passo:</p>
+<h3 id="1-criacao-do-data-warehouse">1. Criação do Data Warehouse<a class="headerlink" href="#1-criacao-do-data-warehouse" title="Permanent link">&para;</a></h3>
+<p>Um <strong>Data Warehouse</strong> é um repositório de dados integrados de diversas fontes. Vamos simular a criação de um Data Warehouse com tabelas de exemplo para vendas, clientes e produtos.</p>
+<h3 id="2-criacao-do-datamart">2. Criação do DataMart<a class="headerlink" href="#2-criacao-do-datamart" title="Permanent link">&para;</a></h3>
+<p>Um <strong>DataMart</strong> é uma parte do Data Warehouse focada em um assunto específico. Vamos criar um DataMart de vendas, que conterá apenas os dados relevantes para a análise de vendas.</p>
+<p>Aqui está o código completo para criar um Data Warehouse e um DataMart usando pandas no Colab:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Importando as bibliotecas necessárias</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Criando o Data Warehouse (DW)</span>
+<span class="c1"># Tabela de Clientes</span>
+<span class="n">clientes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;cliente_id&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="s1">&#39;nome&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;João&#39;</span><span class="p">,</span> <span class="s1">&#39;Maria&#39;</span><span class="p">,</span> <span class="s1">&#39;Pedro&#39;</span><span class="p">,</span> <span class="s1">&#39;Ana&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;cidade&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;São Paulo&#39;</span><span class="p">,</span> <span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">,</span> <span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">,</span> <span class="s1">&#39;Curitiba&#39;</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="c1"># Tabela de Produtos</span>
+<span class="n">produtos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;produto_id&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">101</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">104</span><span class="p">],</span>
+    <span class="s1">&#39;produto_nome&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Notebook&#39;</span><span class="p">,</span> <span class="s1">&#39;Smartphone&#39;</span><span class="p">,</span> <span class="s1">&#39;Tablet&#39;</span><span class="p">,</span> <span class="s1">&#39;Smartwatch&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;preco&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3500</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">1200</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="c1"># Tabela de Vendas</span>
+<span class="n">vendas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;venda_id&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1001</span><span class="p">,</span> <span class="mi">1002</span><span class="p">,</span> <span class="mi">1003</span><span class="p">,</span> <span class="mi">1004</span><span class="p">],</span>
+    <span class="s1">&#39;cliente_id&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="s1">&#39;produto_id&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">101</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">104</span><span class="p">],</span>
+    <span class="s1">&#39;quantidade&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="s1">&#39;data_venda&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;2024-09-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-09-02&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-09-03&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-09-04&#39;</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="c1"># Exibindo o Data Warehouse</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tabela de Clientes:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">clientes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Tabela de Produtos:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">produtos</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Tabela de Vendas:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vendas</span><span class="p">)</span>
+
+<span class="c1"># Criando o DataMart de Vendas</span>
+<span class="c1"># Juntando as tabelas para criar um DataMart de Vendas</span>
+<span class="n">data_mart_vendas</span> <span class="o">=</span> <span class="n">vendas</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">clientes</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;cliente_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">produtos</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;produto_id&#39;</span><span class="p">)</span>
+
+<span class="c1"># Selecionando apenas colunas relevantes para o DataMart de Vendas</span>
+<span class="n">data_mart_vendas</span> <span class="o">=</span> <span class="n">data_mart_vendas</span><span class="p">[[</span><span class="s1">&#39;venda_id&#39;</span><span class="p">,</span> <span class="s1">&#39;nome&#39;</span><span class="p">,</span> <span class="s1">&#39;produto_nome&#39;</span><span class="p">,</span> <span class="s1">&#39;quantidade&#39;</span><span class="p">,</span> <span class="s1">&#39;preco&#39;</span><span class="p">,</span> <span class="s1">&#39;data_venda&#39;</span><span class="p">]]</span>
+
+<span class="c1"># Exibindo o DataMart de Vendas</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">DataMart de Vendas:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data_mart_vendas</span><span class="p">)</span>
+
+<span class="c1"># Criando uma coluna de valor total (quantidade * preço)</span>
+<span class="n">data_mart_vendas</span><span class="p">[</span><span class="s1">&#39;valor_total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_mart_vendas</span><span class="p">[</span><span class="s1">&#39;quantidade&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">data_mart_vendas</span><span class="p">[</span><span class="s1">&#39;preco&#39;</span><span class="p">]</span>
+
+<span class="c1"># Exibindo o DataMart com o valor total</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">DataMart de Vendas com Valor Total:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data_mart_vendas</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="explicacao">Explicação:<a class="headerlink" href="#explicacao" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Data Warehouse</strong>: Temos três tabelas principais (clientes, produtos e vendas).</li>
+<li><strong>DataMart</strong>: Criamos um DataMart focado em vendas, que contém informações de clientes, produtos e vendas, com uma coluna adicional de valor total (quantidade * preço).</li>
+</ol>
+<p>Você pode rodar esse código no Google Colab para simular um pequeno exemplo de Data Warehouse e DataMart.</p>
+<p>Se precisar de mais detalhes ou uma abordagem mais avançada, posso ajudar a expandir o exemplo!</p>
+<h1 id="ponderada">Ponderada<a class="headerlink" href="#ponderada" title="Permanent link">&para;</a></h1>
+<h2 id="criacao-de-dashboard-de-telemetria-do-data-lake-e-do-data-warehouse">Criação de Dashboard de Telemetria do Data Lake e do Data Warehouse<a class="headerlink" href="#criacao-de-dashboard-de-telemetria-do-data-lake-e-do-data-warehouse" title="Permanent link">&para;</a></h2>
+<h2 id="comando">Comando:<a class="headerlink" href="#comando" title="Permanent link">&para;</a></h2>
+<p>Criar um <strong>dashboard de telemetria</strong> para monitorar a utilização do <strong>Data Lake</strong> e do <strong>Data Warehouse</strong>. O Data Lake, que pode estar em buckets ou banco de dados, já deve estar implementado, e o dashboard deve medir a utilização desses recursos. O dashboard deve ser discutido em sala de aula.</p>
+<h2 id="criterios-de-avaliacao">Critérios de Avaliação:<a class="headerlink" href="#criterios-de-avaliacao" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Compreensão dos Dados (25%)</strong>: O aluno deve identificar corretamente os principais elementos a serem utilizados, demonstrando uma compreensão abrangente dos dados.</li>
+<li><strong>Seleção de Métricas Relevantes (20%)</strong>: O aluno deve escolher as métricas relevantes para as necessidades de monitoramento e os objetivos da telemetria.</li>
+<li><strong>Eficiência na Integração de Dados (25%)</strong>: O aluno deve integrar os dados de forma eficiente, criando uma visão unificada e sólida, levando em conta as diferentes fontes.</li>
+<li><strong>Design e Usabilidade do Dashboard (20%)</strong>: O aluno deve criar um design atraente, funcional, organizado e com uma experiência de usuário intuitiva e eficaz.</li>
+<li><strong>Análise e Interpretação dos Resultados (10%)</strong>: O aluno deve apresentar uma análise sólida dos dados, destacando tendências e padrões, fornecendo insights valiosos para a tomada de decisões.</li>
+</ol>
+<h2 id="pontuacao-total-100-pontos">Pontuação Total: <strong>100 pontos</strong><a class="headerlink" href="#pontuacao-total-100-pontos" title="Permanent link">&para;</a></h2>
+<hr />
+<h1 id="barema-de-qualidade">Barema de Qualidade<a class="headerlink" href="#barema-de-qualidade" title="Permanent link">&para;</a></h1>
+<h3 id="1-compreensao-dos-dados-25">1. Compreensão dos Dados (25%)<a class="headerlink" href="#1-compreensao-dos-dados-25" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Avançado (9,1 - 10)</strong>: Compreensão abrangente dos dados, incluindo detalhes relevantes para a telemetria.</li>
+<li><strong>Intermediário (7,1 - 9)</strong>: Compreensão sólida dos dados, identificando corretamente os principais elementos.</li>
+<li><strong>Básico (4,1 - 7)</strong>: Compreensão básica, mas com lacunas significativas na interpretação dos dados.</li>
+<li><strong>Insuficiente (0 - 4)</strong>: Falta de compreensão dos dados presentes no Data Lake e no Data Warehouse.</li>
+</ul>
+<h3 id="2-selecao-de-metricas-relevantes-20">2. Seleção de Métricas Relevantes (20%)<a class="headerlink" href="#2-selecao-de-metricas-relevantes-20" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Avançado (9,1 - 10)</strong>: Seleção excelente de métricas, alinhadas de maneira precisa aos objetivos de telemetria.</li>
+<li><strong>Intermediário (7,1 - 9)</strong>: Escolha sólida de métricas relevantes, demonstrando compreensão das necessidades de monitoramento.</li>
+<li><strong>Básico (4,1 - 7)</strong>: Seleção básica de métricas, mas com falta de abordagem crítica.</li>
+<li><strong>Insuficiente (0 - 4)</strong>: Escolha inadequada ou ausência de métricas relevantes para a telemetria.</li>
+</ul>
+<h3 id="3-eficiencia-na-integracao-de-dados-25">3. Eficiência na Integração de Dados (25%)<a class="headerlink" href="#3-eficiencia-na-integracao-de-dados-25" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Avançado (9,1 - 10)</strong>: Integração eficiente dos dados, proporcionando uma visão unificada e consistente.</li>
+<li><strong>Intermediário (7,1 - 9)</strong>: Integração sólida dos dados, considerando fontes do Data Lake e do Data Warehouse.</li>
+<li><strong>Básico (4,1 - 7)</strong>: Integração básica, mas com erros substanciais ou falta de coerência.</li>
+<li><strong>Insuficiente (0 - 4)</strong>: Implementação inexistente ou com sérios problemas na integração dos dados.</li>
+</ul>
+<h3 id="4-design-e-usabilidade-do-dashboard-20">4. Design e Usabilidade do Dashboard (20%)<a class="headerlink" href="#4-design-e-usabilidade-do-dashboard-20" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Avançado (9,1 - 10)</strong>: Excelente design, proporcionando uma experiência de usuário intuitiva e eficaz.</li>
+<li><strong>Intermediário (7,1 - 9)</strong>: Design atraente e funcional, facilitando a compreensão das métricas apresentadas.</li>
+<li><strong>Básico (4,1 - 7)</strong>: Design básico, com alguns elementos confusos ou desorganizados.</li>
+<li><strong>Insuficiente (0 - 4)</strong>: Design inadequado, dificultando a interpretação das informações.</li>
+</ul>
+<h3 id="5-analise-e-interpretacao-dos-resultados-10">5. Análise e Interpretação dos Resultados (10%)<a class="headerlink" href="#5-analise-e-interpretacao-dos-resultados-10" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Avançado (9,1 - 10)</strong>: Análise excepcional, oferecendo insights valiosos para a tomada de decisões.</li>
+<li><strong>Intermediário (7,1 - 9)</strong>: Análise sólida, destacando tendências e padrões relevantes.</li>
+<li><strong>Básico (4,1 - 7)</strong>: Análise básica, com falta de profundidade ou insights significativos.</li>
+<li><strong>Insuficiente (0 - 4)</strong>: Falha na análise ou interpretação dos resultados apresentados.</li>
+</ul>
+<h2 id="pontuacao-total-100">Pontuação Total: <strong>100%</strong><a class="headerlink" href="#pontuacao-total-100" title="Permanent link">&para;</a></h2></div>
         
         
     </div>
