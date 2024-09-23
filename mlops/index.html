@@ -195,11 +195,253 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#ciclo-de-vida-e-automatizacao-de-pipeline-de-dados-mlops">Ciclo de Vida e Automatização de Pipeline de Dados (MLOps)</a></li>
+            <li class="second-level"><a href="#autoestudos">Autoestudos</a></li>
+                
+            <li class="second-level"><a href="#data-lifecycle">Data Lifecycle</a></li>
+                
+            <li class="second-level"><a href="#pydantic-e-sua-importancia-no-data-lifecycle">Pydantic e sua importância no Data Lifecycle</a></li>
+                
+                <li class="third-level"><a href="#explicacao-do-pydantic-e-sua-importancia-no-ciclo-de-vida-dos-dados">Explicação do Pydantic e sua Importância no Ciclo de Vida dos Dados</a></li>
+            <li class="second-level"><a href="#mao-na-massa-com-colab">Mão na Massa com Colab</a></li>
+                
+                <li class="third-level"><a href="#passo-1-configuracao-inicial">Passo 1: Configuração Inicial</a></li>
+                <li class="third-level"><a href="#passo-2-configurando-o-banco-de-dados-sqlite">Passo 2: Configurando o Banco de Dados SQLite</a></li>
+                <li class="third-level"><a href="#passo-3-validacao-dos-dados-com-pydantic">Passo 3: Validação dos Dados com Pydantic</a></li>
+                <li class="third-level"><a href="#passo-4-tdd-com-pytest">Passo 4: TDD com Pytest</a></li>
+                <li class="third-level"><a href="#passo-5-visualizando-os-dados-com-plotly">Passo 5: Visualizando os Dados com Plotly</a></li>
+                <li class="third-level"><a href="#passo-6-integracao-completa">Passo 6: Integração Completa</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
-</div>
+<h1 id="ciclo-de-vida-e-automatizacao-de-pipeline-de-dados-mlops">Ciclo de Vida e Automatização de Pipeline de Dados (MLOps)<a class="headerlink" href="#ciclo-de-vida-e-automatizacao-de-pipeline-de-dados-mlops" title="Permanent link">&para;</a></h1>
+<h2 id="autoestudos">Autoestudos<a class="headerlink" href="#autoestudos" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Autoestudo</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O ciclo de vida de um projeto de dados</td>
+<td><a href="https://www.programaria.org/o-ciclo-de-vida-de-um-projeto-de-dados/">Link</a></td>
+</tr>
+<tr>
+<td>Notebook de Como gerenciar o ciclo de vida com MLFlow e Prefect</td>
+<td><a href="https://colab.research.google.com/drive/1F8-QykLhfrpXG2sWirQ0I2kjzt2pHN_Y?usp=sharing">Link</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<iframe src="https://docs.google.com/presentation/d/1oasmXTFCoRoSq-Rt97y-8nSJt7IdNwow/embed?start=false&loop=false&delayms=3000" frameborder="0" width="768" height="461" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<hr />
+<h2 id="data-lifecycle">Data Lifecycle<a class="headerlink" href="#data-lifecycle" title="Permanent link">&para;</a></h2>
+<p><img alt="imagem" src="https://youngdestinya.ng/wp-content/uploads/2024/07/data-lifecycle-management.jpg" /></p>
+<p><img alt="imagem" src="https://datamanagement.hms.harvard.edu/sites/default/files/assets/Images/RDM-lifecycle-2tier-v5.png" /></p>
+<h2 id="pydantic-e-sua-importancia-no-data-lifecycle">Pydantic e sua importância no Data Lifecycle<a class="headerlink" href="#pydantic-e-sua-importancia-no-data-lifecycle" title="Permanent link">&para;</a></h2>
+<h3 id="explicacao-do-pydantic-e-sua-importancia-no-ciclo-de-vida-dos-dados">Explicação do Pydantic e sua Importância no Ciclo de Vida dos Dados<a class="headerlink" href="#explicacao-do-pydantic-e-sua-importancia-no-ciclo-de-vida-dos-dados" title="Permanent link">&para;</a></h3>
+<p><strong>Pydantic</strong> é uma biblioteca Python utilizada para modelagem e validação de dados com base em tipos de dados nativos. Ele permite a criação de classes baseadas em modelos que podem validar automaticamente a entrada de dados, assegurando que estejam em conformidade com os tipos esperados. O Pydantic também facilita a conversão de dados entre diferentes formatos, como objetos Python e JSON, com validação rigorosa.</p>
+<h4 id="por-que-o-pydantic-e-importante-no-ciclo-de-vida-dos-dados"><strong>Por que o Pydantic é Importante no Ciclo de Vida dos Dados?</strong><a class="headerlink" href="#por-que-o-pydantic-e-importante-no-ciclo-de-vida-dos-dados" title="Permanent link">&para;</a></h4>
+<p>No <strong>Ciclo de Vida dos Dados</strong>, os dados passam por diversas etapas — coleta, armazenamento, processamento, análise, e visualização. Garantir que esses dados sejam corretos e estejam no formato adequado é crucial para a eficácia de todo o processo. O Pydantic desempenha um papel central em duas dessas etapas: <strong>processamento/validação</strong> e <strong>análise</strong>. Aqui estão os motivos pelos quais o Pydantic é fundamental:</p>
+<p><strong>Validação Automática e Eficiente:</strong></p>
+<ul>
+<li>Durante o ciclo de vida dos dados, eles podem ser provenientes de várias fontes (APIs, bancos de dados, arquivos). Cada fonte pode ter diferentes formatos e tipos de dados. O Pydantic permite validar esses dados automaticamente, garantindo que eles estejam corretos antes de serem processados ou armazenados.</li>
+<li>Exemplo: Se um campo <code>preco</code> deve ser um número positivo, o Pydantic valida automaticamente se os dados atendem a essa regra, impedindo que valores incorretos passem adiante.</li>
+</ul>
+<p><strong>Conversão entre Formatos de Dados:</strong></p>
+<ul>
+<li>O Pydantic facilita a conversão de dados entre diferentes representações, como converter dados de JSON para objetos Python ou de uma consulta de banco de dados para um formato utilizável em APIs. Isso é particularmente importante para o intercâmbio de dados entre diferentes sistemas.</li>
+<li>Exemplo: Se uma API retorna dados em formato JSON, o Pydantic pode transformar automaticamente esses dados em um objeto Python validado, pronto para ser manipulado.</li>
+</ul>
+<p><strong>Garantia de Qualidade de Dados:</strong></p>
+<ul>
+<li>Um dos grandes desafios no ciclo de vida dos dados é garantir a qualidade dos dados. Isso envolve assegurar que os dados estão completos, no formato correto e sem inconsistências. Com o Pydantic, você pode definir regras de validação robustas, que garantem que apenas dados limpos e corretos avancem nas etapas subsequentes do ciclo.</li>
+<li>Exemplo: Um campo como <code>email</code> pode ser validado para verificar se tem um formato correto de e-mail. Se o dado estiver incorreto, o Pydantic levantará um erro antes que o dado seja processado.</li>
+</ul>
+<p><strong>Facilidade de Integração com Bancos de Dados e APIs:</strong></p>
+<ul>
+<li>O Pydantic possui um modo especial para trabalhar com ORMs (Object-Relational Mappers), como SQLAlchemy, permitindo validar os dados diretamente extraídos de um banco de dados. Isso ajuda a integrar a validação de dados com sistemas de armazenamento e APIs, mantendo a consistência.</li>
+<li>Exemplo: Dados extraídos de um banco de dados podem ser validados em tempo real antes de serem usados em análises ou exibidos em visualizações.</li>
+</ul>
+<p><strong>Documentação e Manutenção de Código Simples:</strong></p>
+<ul>
+<li>O Pydantic utiliza anotações de tipo, o que facilita a leitura e manutenção do código. Quando as regras de validação estão claramente definidas em um modelo Pydantic, outros desenvolvedores ou analistas podem entender rapidamente quais dados são esperados e quais são as regras de validação.</li>
+<li>Exemplo: O modelo Pydantic de um "Produto" define os tipos de dados e suas restrições, tornando explícito que <code>preco</code> deve ser positivo e que <code>estoque</code> deve ser um número inteiro.</li>
+</ul>
+<h4 id="ciclo-de-vida-dos-dados-e-a-validacao-com-pydantic"><strong>Ciclo de Vida dos Dados e a Validação com Pydantic</strong><a class="headerlink" href="#ciclo-de-vida-dos-dados-e-a-validacao-com-pydantic" title="Permanent link">&para;</a></h4>
+<p>No contexto do ciclo de vida dos dados, o Pydantic pode ser utilizado em diferentes momentos:</p>
+<ul>
+<li><strong>Coleta/Extração:</strong> Os dados brutos são extraídos de fontes diversas. O Pydantic valida esses dados imediatamente, corrigindo erros antes que avancem no ciclo.</li>
+<li><strong>Processamento/Validação:</strong> Os dados validados com Pydantic podem ser transformados e preparados para uso posterior. Isso garante que os dados armazenados ou analisados são de alta qualidade.</li>
+<li><strong>Análise/Visualização:</strong> Quando os dados chegam a essa fase, eles já foram validados e estão prontos para análises complexas, o que minimiza erros nas visualizações e decisões de negócios baseadas nesses dados.</li>
+</ul>
+<hr />
+<h2 id="mao-na-massa-com-colab">Mão na Massa com Colab<a class="headerlink" href="#mao-na-massa-com-colab" title="Permanent link">&para;</a></h2>
+<p>Neste notebook, vamos explorar o <strong>Ciclo de Vida dos Dados</strong> usando <strong>SQLite</strong>, <strong>Pydantic</strong> para validação, <strong>Pytest</strong> para TDD, e <strong>Plotly</strong> para visualização de dados. Todo o processo será simulado em um ambiente SQLite, que será criado e preenchido automaticamente.</p>
+<h3 id="passo-1-configuracao-inicial"><strong>Passo 1: Configuração Inicial</strong><a class="headerlink" href="#passo-1-configuracao-inicial" title="Permanent link">&para;</a></h3>
+<p>No Colab, você pode instalar as dependências diretamente usando o seguinte código:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">sqlalchemy</span> <span class="n">pydantic</span> <span class="n">pytest</span> <span class="n">plotly</span>
+</code></pre></div>
+
+<h3 id="passo-2-configurando-o-banco-de-dados-sqlite"><strong>Passo 2: Configurando o Banco de Dados SQLite</strong><a class="headerlink" href="#passo-2-configurando-o-banco-de-dados-sqlite" title="Permanent link">&para;</a></h3>
+<p>Aqui, vamos criar um banco de dados SQLite em memória e preenchê-lo com dados de exemplo.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">Float</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declarative_base</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span>
+
+<span class="c1"># Criação do banco de dados SQLite</span>
+<span class="n">DATABASE_URL</span> <span class="o">=</span> <span class="s2">&quot;sqlite:///produtos.db&quot;</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">DATABASE_URL</span><span class="p">)</span>
+
+<span class="c1"># Criando a base do SQLAlchemy</span>
+<span class="n">Base</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">()</span>
+
+<span class="c1"># Definindo a tabela &quot;produtos&quot;</span>
+<span class="k">class</span> <span class="nc">Produto</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;produtos&#39;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">nome</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">preco</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Float</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">estoque</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Criando a tabela no banco de dados</span>
+<span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="c1"># Criando a sessão</span>
+<span class="n">Session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+
+<span class="c1"># Preenchendo o banco de dados com dados automáticos</span>
+<span class="k">def</span> <span class="nf">preencher_dados</span><span class="p">():</span>
+    <span class="n">produtos</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Produto</span><span class="p">(</span><span class="n">nome</span><span class="o">=</span><span class="s2">&quot;Caneta&quot;</span><span class="p">,</span> <span class="n">preco</span><span class="o">=</span><span class="mf">1.50</span><span class="p">,</span> <span class="n">estoque</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+        <span class="n">Produto</span><span class="p">(</span><span class="n">nome</span><span class="o">=</span><span class="s2">&quot;Lápis&quot;</span><span class="p">,</span> <span class="n">preco</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">estoque</span><span class="o">=</span><span class="mi">200</span><span class="p">),</span>
+        <span class="n">Produto</span><span class="p">(</span><span class="n">nome</span><span class="o">=</span><span class="s2">&quot;Borracha&quot;</span><span class="p">,</span> <span class="n">preco</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">estoque</span><span class="o">=</span><span class="mi">150</span><span class="p">),</span>
+        <span class="n">Produto</span><span class="p">(</span><span class="n">nome</span><span class="o">=</span><span class="s2">&quot;Caderno&quot;</span><span class="p">,</span> <span class="n">preco</span><span class="o">=</span><span class="mf">15.00</span><span class="p">,</span> <span class="n">estoque</span><span class="o">=</span><span class="mi">75</span><span class="p">),</span>
+        <span class="n">Produto</span><span class="p">(</span><span class="n">nome</span><span class="o">=</span><span class="s2">&quot;Mochila&quot;</span><span class="p">,</span> <span class="n">preco</span><span class="o">=</span><span class="mf">50.00</span><span class="p">,</span> <span class="n">estoque</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">bulk_save_objects</span><span class="p">(</span><span class="n">produtos</span><span class="p">)</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="c1"># Preenchendo os dados</span>
+<span class="n">preencher_dados</span><span class="p">()</span>
+
+<span class="c1"># Verificando se os dados foram inseridos</span>
+<span class="n">produtos</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Produto</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">produto</span> <span class="ow">in</span> <span class="n">produtos</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ID: </span><span class="si">{</span><span class="n">produto</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">, Nome: </span><span class="si">{</span><span class="n">produto</span><span class="o">.</span><span class="n">nome</span><span class="si">}</span><span class="s2">, Preço: </span><span class="si">{</span><span class="n">produto</span><span class="o">.</span><span class="n">preco</span><span class="si">}</span><span class="s2">, Estoque: </span><span class="si">{</span><span class="n">produto</span><span class="o">.</span><span class="n">estoque</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="passo-3-validacao-dos-dados-com-pydantic"><strong>Passo 3: Validação dos Dados com Pydantic</strong><a class="headerlink" href="#passo-3-validacao-dos-dados-com-pydantic" title="Permanent link">&para;</a></h3>
+<p>Agora, vamos definir um modelo Pydantic para validar os dados que extraímos do banco de dados.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">constr</span><span class="p">,</span> <span class="n">conint</span><span class="p">,</span> <span class="n">confloat</span>
+
+<span class="c1"># Definindo o modelo Pydantic para validação</span>
+<span class="k">class</span> <span class="nc">ProdutoModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">nome</span><span class="p">:</span> <span class="n">constr</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">preco</span><span class="p">:</span> <span class="n">confloat</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">estoque</span><span class="p">:</span> <span class="n">conint</span><span class="p">(</span><span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+        <span class="n">orm_mode</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Função para validar os produtos</span>
+<span class="k">def</span> <span class="nf">validar_produtos</span><span class="p">(</span><span class="n">produtos</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">ProdutoModel</span><span class="o">.</span><span class="n">from_orm</span><span class="p">(</span><span class="n">produto</span><span class="p">)</span> <span class="k">for</span> <span class="n">produto</span> <span class="ow">in</span> <span class="n">produtos</span><span class="p">]</span>
+
+<span class="c1"># Validação dos produtos extraídos</span>
+<span class="n">produtos_validados</span> <span class="o">=</span> <span class="n">validar_produtos</span><span class="p">(</span><span class="n">produtos</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">produto</span> <span class="ow">in</span> <span class="n">produtos_validados</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">produto</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre></div>
+
+<h3 id="passo-4-tdd-com-pytest"><strong>Passo 4: TDD com Pytest</strong><a class="headerlink" href="#passo-4-tdd-com-pytest" title="Permanent link">&para;</a></h3>
+<p>Embora o Pytest seja mais utilizado fora do ambiente Colab, podemos simular os testes de validação diretamente no notebook.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">ValidationError</span>
+
+<span class="c1"># Função de teste para produto válido</span>
+<span class="k">def</span> <span class="nf">test_produto_valido</span><span class="p">():</span>
+    <span class="n">dados</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;nome&quot;</span><span class="p">:</span> <span class="s2">&quot;Caneta&quot;</span><span class="p">,</span> <span class="s2">&quot;preco&quot;</span><span class="p">:</span> <span class="mf">1.50</span><span class="p">,</span> <span class="s2">&quot;estoque&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">}</span>
+    <span class="n">produto</span> <span class="o">=</span> <span class="n">ProdutoModel</span><span class="p">(</span><span class="o">**</span><span class="n">dados</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">produto</span><span class="o">.</span><span class="n">nome</span> <span class="o">==</span> <span class="s2">&quot;Caneta&quot;</span>
+    <span class="k">assert</span> <span class="n">produto</span><span class="o">.</span><span class="n">preco</span> <span class="o">==</span> <span class="mf">1.50</span>
+
+<span class="c1"># Função de teste para nome inválido</span>
+<span class="k">def</span> <span class="nf">test_nome_invalido</span><span class="p">():</span>
+    <span class="n">dados</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;nome&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;preco&quot;</span><span class="p">:</span> <span class="mf">2.99</span><span class="p">,</span> <span class="s2">&quot;estoque&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">}</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">ProdutoModel</span><span class="p">(</span><span class="o">**</span><span class="n">dados</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+<span class="c1"># Função de teste para preço negativo</span>
+<span class="k">def</span> <span class="nf">test_preco_negativo</span><span class="p">():</span>
+    <span class="n">dados</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;nome&quot;</span><span class="p">:</span> <span class="s2">&quot;Borracha&quot;</span><span class="p">,</span> <span class="s2">&quot;preco&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;estoque&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">}</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">ProdutoModel</span><span class="p">(</span><span class="o">**</span><span class="n">dados</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+<span class="c1"># Executando os testes</span>
+<span class="n">test_produto_valido</span><span class="p">()</span>
+<span class="n">test_nome_invalido</span><span class="p">()</span>
+<span class="n">test_preco_negativo</span><span class="p">()</span>
+</code></pre></div>
+
+<h3 id="passo-5-visualizando-os-dados-com-plotly"><strong>Passo 5: Visualizando os Dados com Plotly</strong><a class="headerlink" href="#passo-5-visualizando-os-dados-com-plotly" title="Permanent link">&para;</a></h3>
+<p>Agora, vamos usar o <strong>Plotly</strong> para visualizar os dados. Primeiro, criaremos um gráfico de barras que mostra o estoque de cada produto.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+
+<span class="c1"># Criando gráfico de barras para o estoque</span>
+<span class="k">def</span> <span class="nf">grafico_estoque</span><span class="p">(</span><span class="n">produtos</span><span class="p">):</span>
+    <span class="n">nomes</span> <span class="o">=</span> <span class="p">[</span><span class="n">produto</span><span class="o">.</span><span class="n">nome</span> <span class="k">for</span> <span class="n">produto</span> <span class="ow">in</span> <span class="n">produtos</span><span class="p">]</span>
+    <span class="n">estoques</span> <span class="o">=</span> <span class="p">[</span><span class="n">produto</span><span class="o">.</span><span class="n">estoque</span> <span class="k">for</span> <span class="n">produto</span> <span class="ow">in</span> <span class="n">produtos</span><span class="p">]</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">([</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">nomes</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">estoques</span><span class="p">)])</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Estoque de Produtos&quot;</span><span class="p">,</span> <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">&quot;Produto&quot;</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">&quot;Quantidade em Estoque&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Exibindo o gráfico de estoque</span>
+<span class="n">grafico_estoque</span><span class="p">(</span><span class="n">produtos_validados</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Também podemos criar um gráfico de pizza para visualizar a distribuição de preços dos produtos.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Criando gráfico de pizza para distribuição de preços</span>
+<span class="k">def</span> <span class="nf">grafico_precos</span><span class="p">(</span><span class="n">produtos</span><span class="p">):</span>
+    <span class="n">nomes</span> <span class="o">=</span> <span class="p">[</span><span class="n">produto</span><span class="o">.</span><span class="n">nome</span> <span class="k">for</span> <span class="n">produto</span> <span class="ow">in</span> <span class="n">produtos</span><span class="p">]</span>
+    <span class="n">precos</span> <span class="o">=</span> <span class="p">[</span><span class="n">produto</span><span class="o">.</span><span class="n">preco</span> <span class="k">for</span> <span class="n">produto</span> <span class="ow">in</span> <span class="n">produtos</span><span class="p">]</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Pie</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">nomes</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">precos</span><span class="p">,</span> <span class="n">hole</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)])</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Distribuição de Preços&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Exibindo o gráfico de preços</span>
+<span class="n">grafico_precos</span><span class="p">(</span><span class="n">produtos_validados</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="passo-6-integracao-completa"><strong>Passo 6: Integração Completa</strong><a class="headerlink" href="#passo-6-integracao-completa" title="Permanent link">&para;</a></h3>
+<p>Agora, vamos combinar todas as etapas em um único fluxo: extrair, validar e visualizar os dados.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">ciclo_de_vida_completo</span><span class="p">():</span>
+    <span class="c1"># Extração dos produtos do banco</span>
+    <span class="n">produtos_brutos</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Produto</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+    <span class="c1"># Validação dos produtos</span>
+    <span class="n">produtos_validados</span> <span class="o">=</span> <span class="n">validar_produtos</span><span class="p">(</span><span class="n">produtos_brutos</span><span class="p">)</span>
+
+    <span class="c1"># Visualizações</span>
+    <span class="n">grafico_estoque</span><span class="p">(</span><span class="n">produtos_validados</span><span class="p">)</span>
+    <span class="n">grafico_precos</span><span class="p">(</span><span class="n">produtos_validados</span><span class="p">)</span>
+
+<span class="c1"># Executando o ciclo de vida completo</span>
+<span class="n">ciclo_de_vida_completo</span><span class="p">()</span>
+</code></pre></div></div>
         
         
     </div>
